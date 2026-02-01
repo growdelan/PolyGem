@@ -25,6 +25,21 @@ class SmokeTest(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.get_json(), {"translation": "Czesc"})
 
+    def test_translate_stream_stubbed(self):
+        client = app.test_client()
+        with patch("src.app.translate_stream", return_value=iter(["A", "B"])):
+            response = client.post(
+                "/translate",
+                json={
+                    "text": "Hello",
+                    "source_lang": "en",
+                    "target_lang": "pl",
+                    "stream": True,
+                },
+            )
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.get_data(as_text=True), "AB")
+
     def test_translate_too_long(self):
         client = app.test_client()
         response = client.post("/translate", json={"text": "a" * 20001})
