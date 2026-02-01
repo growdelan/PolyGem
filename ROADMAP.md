@@ -128,9 +128,11 @@ Cel:
 Definition of Done:
 - aplikacja obsługuje adres Ollama z `OLLAMA_CUSTOM_ADDR`
 - aplikacja obsługuje wyłączenie weryfikacji TLS przez `OLLAMA_VERYFI_SSL`
+- aplikacja obsługuje ustawienie adresu startu Flask przez `FLASK_BIND_ADDR`
 - README opisuje nowe zmienne środowiskowe
 
 Zakres:
 - odczyt zmiennych środowiskowych dla hosta i weryfikacji TLS
 - przekazanie konfiguracji do klienta Ollama
+- odczyt zmiennej środowiskowej dla adresu startu Flask
 - aktualizacja dokumentacji uruchomienia
