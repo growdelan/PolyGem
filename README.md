@@ -39,6 +39,10 @@ uv run src/app.py
 - Zapamiętywanie wybranych języków w LocalStorage
 - Export tłumaczenia do pliku `.txt`
 
+## Zmienne środowiskowe
+- `OLLAMA_CUSTOM_ADDR` – opcjonalny adres serwera Ollama (domyślnie lokalny).
+- `OLLAMA_VERYFI_SSL` – ustaw `false/0/no`, aby wyłączyć weryfikację certyfikatu TLS.
+
 ## Skróty klawiaturowe
 - ⌘⏎ / Ctrl+Enter – rozpocznij tłumaczenie
 - ⌘K / Ctrl+K – zamień języki

@@ -29,6 +29,10 @@ Główne przepływy użytkownika:
 - śledzenie statusu i ewentualne przerwanie tłumaczenia
 - operacje na wyniku (kopiuj, zapisz)
 
+Nowa funkcjonalność (PRD 001):
+- konfiguracja adresu serwera Ollama przez zmienną środowiskową
+- opcjonalne wyłączenie weryfikacji certyfikatu TLS przez zmienną środowiskową
+
 Czego aplikacja nie robi:
 - brak historii i cache
 - brak autodetekcji języka
@@ -59,6 +63,9 @@ Opis architektury na poziomie koncepcyjnym.
    - backend: orkiestracja tłumaczenia, streaming, obsługa błędów
    - Ollama: generacja tłumaczenia
 
+Nowa funkcjonalność (PRD 001):
+- backend odczytuje konfigurację adresu Ollama i ustawień TLS z zmiennych środowiskowych
+
 ---
 
 ## Komponenty techniczne
@@ -68,6 +75,7 @@ Lista kluczowych komponentów technicznych i ich odpowiedzialności.
 - Warstwa integracji z Ollama: wywołanie modelu translategemma i obsługa strumieniowania
 - Frontend (HTML/CSS/JS): interfejs użytkownika, status, akcje, skróty
 - LocalStorage: zapis preferencji języków i trybu jasny/ciemny
+- Konfiguracja środowiskowa: ustawienie adresu Ollama i weryfikacji TLS
 
 ---
 
@@ -102,6 +110,10 @@ Każda decyzja powinna zawierać:
 - Decyzja: Streaming realizowany jest jako strumień tekstowy HTTP z jednego endpointu `/translate`.
   Uzasadnienie: PRD nie narzuca formatu transportu, wybrano najprostszą formę bez dodatkowych protokołów.
   Konsekwencje: Klient odbiera surowe fragmenty tekstu i może przerwać połączenie (Cancel) przez anulowanie żądania.
+
+- Decyzja (PRD 001): Konfiguracja adresu Ollama i weryfikacji TLS przez zmienne środowiskowe.
+  Uzasadnienie: PRD wymaga ustawiania adresu i weryfikacji certyfikatu bez zmian w UI.
+  Konsekwencje: Konfiguracja odbywa się poza aplikacją; konieczne jest udokumentowanie zmiennych.
 
 ---
 
