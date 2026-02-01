@@ -86,7 +86,7 @@ Zakres:
 
 ---
 
-## Milestone 2.5: Ustawienia i export (planned)
+## Milestone 2.5: Ustawienia i export (done)
 
 Cel:
 - zachowanie preferencji i zapis tłumaczenia do pliku

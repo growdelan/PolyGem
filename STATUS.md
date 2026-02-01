@@ -10,6 +10,9 @@
 - Przycisk Swap (zamiana języków i treści)
 - Kopiowanie tłumaczenia do schowka
 - Skróty klawiaturowe (⌘⏎, ⌘L, ⌘⇧C)
+- Tryb jasny/ciemny z persistencją
+- Zapamiętywanie języków w LocalStorage
+- Export tłumaczenia do pliku `.txt`
 - Testy `unittest` przechodzą
 
 ## Co jest skończone
@@ -17,14 +20,15 @@
 - Milestone 1.0: podstawowe tłumaczenie z UI
 - Milestone 1.5: streaming i kontrola procesu
 - Milestone 2.0: udogodnienia użytkownika
+- Milestone 2.5: ustawienia i export
 
 ## Co jest w trakcie
 
 ## Co jest następne
-- Milestone 2.5: ustawienia i export
+- TODO
 
 ## Blokery i ryzyka
 - Brak
 
 ## Ostatnie aktualizacje
-- 2026-02-01: zakończono Milestone 2.0
+- 2026-02-01: zakończono Milestone 2.5

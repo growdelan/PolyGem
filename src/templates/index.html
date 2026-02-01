@@ -42,7 +42,10 @@
             <div class="panel">
                 <div class="panel-header">
                     <label for="target-text">Tłumaczenie</label>
-                    <button id="copy" type="button" class="icon" aria-label="Kopiuj tłumaczenie">📋</button>
+                    <div class="panel-actions">
+                        <button id="copy" type="button" class="icon" aria-label="Kopiuj tłumaczenie">📋</button>
+                        <button id="export" type="button" class="icon" aria-label="Zapisz tłumaczenie">💾</button>
+                    </div>
                 </div>
                 <textarea id="target-text" rows="12" readonly></textarea>
             </div>
@@ -53,6 +56,7 @@
             <button id="cancel" type="button" class="secondary" disabled>Cancel</button>
             <span class="spinner" id="spinner" aria-hidden="true"></span>
             <span id="status" class="status"></span>
+            <button id="theme-toggle" type="button" class="theme-toggle">Tryb ciemny</button>
         </section>
     </main>
 
