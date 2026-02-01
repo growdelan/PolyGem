@@ -1,10 +1,12 @@
 import os
+from urllib.parse import urlparse
 
 from flask import Flask, Response, jsonify, render_template, request
 from ollama import Client
 
 MODEL_NAME = "translategemma"
 MAX_TEXT_LENGTH = 20000
+DEFAULT_BIND_URL = "http://127.0.0.1:8000"
 LANGUAGES = [
     {"code": "pl", "name": "Polish"},
     {"code": "en", "name": "English"},
@@ -51,6 +53,15 @@ def parse_env_bool(value: str | None) -> bool | None:
     if value is None:
         return None
     return value.strip().lower() not in {"0", "false", "no"}
+
+
+def parse_bind_url(url: str) -> tuple[str, int]:
+    if "://" not in url:
+        url = f"http://{url}"
+    parsed = urlparse(url)
+    host = parsed.hostname or "127.0.0.1"
+    port = parsed.port or 8000
+    return host, port
 
 
 def get_ollama_client() -> Client:
@@ -134,4 +145,6 @@ def translate():
 
 
 if __name__ == "__main__":
-    app.run(host="127.0.0.1", port=8000)
+    bind_url = os.getenv("FLASK_BIND_ADDR", DEFAULT_BIND_URL)
+    host, port = parse_bind_url(bind_url)
+    app.run(host=host, port=port)

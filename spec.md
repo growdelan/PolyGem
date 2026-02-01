@@ -76,6 +76,7 @@ Lista kluczowych komponentów technicznych i ich odpowiedzialności.
 - Frontend (HTML/CSS/JS): interfejs użytkownika, status, akcje, skróty
 - LocalStorage: zapis preferencji języków i trybu jasny/ciemny
 - Konfiguracja środowiskowa: ustawienie adresu Ollama i weryfikacji TLS
+- Konfiguracja środowiskowa: ustawienie adresu startu serwera Flask
 
 ---
 
@@ -114,6 +115,10 @@ Każda decyzja powinna zawierać:
 - Decyzja (PRD 001): Konfiguracja adresu Ollama i weryfikacji TLS przez zmienne środowiskowe.
   Uzasadnienie: PRD wymaga ustawiania adresu i weryfikacji certyfikatu bez zmian w UI.
   Konsekwencje: Konfiguracja odbywa się poza aplikacją; konieczne jest udokumentowanie zmiennych.
+
+- Decyzja: Adres startu serwera Flask może być ustawiany przez `FLASK_BIND_ADDR`.
+  Uzasadnienie: Wymaganie umożliwienia uruchomienia aplikacji pod innym adresem bez zmian w kodzie.
+  Konsekwencje: Parametry host/port są pobierane z URL; domyślnie pozostaje `http://127.0.0.1:8000`.
 
 ---
 
