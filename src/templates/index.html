@@ -19,7 +19,7 @@
                     {% endfor %}
                 </select>
             </div>
-            <span class="swap">⇄</span>
+            <button id="swap" type="button" class="swap" aria-label="Zamień języki">⇄</button>
             <div class="field">
                 <label for="target-lang">Docelowy</label>
                 <select id="target-lang" name="target-lang">
@@ -34,11 +34,16 @@
 
         <section class="panels">
             <div class="panel">
-                <label for="source-text">Tekst wejściowy</label>
+                <div class="panel-header">
+                    <label for="source-text">Tekst wejściowy</label>
+                </div>
                 <textarea id="source-text" rows="12" placeholder="Wpisz tekst do tłumaczenia..."></textarea>
             </div>
             <div class="panel">
-                <label for="target-text">Tłumaczenie</label>
+                <div class="panel-header">
+                    <label for="target-text">Tłumaczenie</label>
+                    <button id="copy" type="button" class="icon" aria-label="Kopiuj tłumaczenie">📋</button>
+                </div>
                 <textarea id="target-text" rows="12" readonly></textarea>
             </div>
         </section>
