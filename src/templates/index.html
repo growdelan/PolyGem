@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="pl">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Local AI Translator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" />
+</head>
+<body>
+    <main class="app">
+        <header class="toolbar">
+            <div class="field">
+                <label for="source-lang">Źródłowy</label>
+                <select id="source-lang" name="source-lang">
+                    {% for language in languages %}
+                    <option value="{{ language.code }}" {% if language.code == default_source %}selected{% endif %}>
+                        {{ language.name }} ({{ language.code }})
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <span class="swap">⇄</span>
+            <div class="field">
+                <label for="target-lang">Docelowy</label>
+                <select id="target-lang" name="target-lang">
+                    {% for language in languages %}
+                    <option value="{{ language.code }}" {% if language.code == default_target %}selected{% endif %}>
+                        {{ language.name }} ({{ language.code }})
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+        </header>
+
+        <section class="panels">
+            <div class="panel">
+                <label for="source-text">Tekst wejściowy</label>
+                <textarea id="source-text" rows="12" placeholder="Wpisz tekst do tłumaczenia..."></textarea>
+            </div>
+            <div class="panel">
+                <label for="target-text">Tłumaczenie</label>
+                <textarea id="target-text" rows="12" readonly></textarea>
+            </div>
+        </section>
+
+        <section class="actions">
+            <button id="translate" type="button">Translate</button>
+            <span id="status" class="status"></span>
+        </section>
+    </main>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

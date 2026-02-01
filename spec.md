@@ -95,9 +95,9 @@ Każda decyzja powinna zawierać:
   Uzasadnienie: PRD wymaga pełnej prywatności i braku dostępu sieciowego poza localhost.
   Konsekwencje: Brak funkcji chmurowych i zdalnego dostępu.
 
-- Decyzja: W Milestone 0.5 tłumaczenie jest deterministycznym echem wejścia.
-  Uzasadnienie: Najprostszy poprawny wynik dla minimalnego end-to-end slice bez integracji z Ollama.
-  Konsekwencje: Brak realnej jakości tłumaczenia do czasu kolejnych milestone’ów.
+- Decyzja: Limit długości wejścia to 20 000 znaków z komunikatem błędu.
+  Uzasadnienie: PRD podaje zakres 10–20 tys. znaków bez dokładnej granicy, wybrano górny limit jako najprostsze założenie.
+  Konsekwencje: Dłuższe teksty są odrzucane z komunikatem „Text too long. Please shorten the input.”
 
 ---
 
