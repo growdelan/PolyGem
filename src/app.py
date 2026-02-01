@@ -1,8 +1,12 @@
+import os
+from urllib.parse import urlparse
+
 from flask import Flask, Response, jsonify, render_template, request
-from ollama import chat
+from ollama import Client
 
 MODEL_NAME = "translategemma"
 MAX_TEXT_LENGTH = 20000
+DEFAULT_BIND_URL = "http://127.0.0.1:8000"
 LANGUAGES = [
     {"code": "pl", "name": "Polish"},
     {"code": "en", "name": "English"},
@@ -18,6 +22,7 @@ LANGUAGES = [
 ]
 
 app = Flask(__name__, template_folder="templates", static_folder="static")
+_ollama_client = None
 
 
 def get_language_name(code: str) -> str | None:
@@ -44,9 +49,41 @@ def build_prompt(source_code: str, target_code: str, text: str) -> str:
     )
 
 
+def parse_env_bool(value: str | None) -> bool | None:
+    if value is None:
+        return None
+    return value.strip().lower() not in {"0", "false", "no"}
+
+
+def parse_bind_url(url: str) -> tuple[str, int]:
+    if "://" not in url:
+        url = f"http://{url}"
+    parsed = urlparse(url)
+    host = parsed.hostname or "127.0.0.1"
+    port = parsed.port or 8000
+    return host, port
+
+
+def get_ollama_client() -> Client:
+    global _ollama_client
+    if _ollama_client is not None:
+        return _ollama_client
+
+    host = os.getenv("OLLAMA_CUSTOM_ADDR")
+    verify_env = os.getenv("OLLAMA_VERYFI_SSL")
+    verify = parse_env_bool(verify_env)
+    kwargs = {}
+    if verify is not None:
+        kwargs["verify"] = verify
+
+    _ollama_client = Client(host=host, **kwargs)
+    return _ollama_client
+
+
 def translate_text(text: str, source_code: str, target_code: str) -> str:
     prompt = build_prompt(source_code, target_code, text)
-    response = chat(
+    client = get_ollama_client()
+    response = client.chat(
         model=MODEL_NAME,
         messages=[{"role": "user", "content": prompt}],
     )
@@ -55,7 +92,8 @@ def translate_text(text: str, source_code: str, target_code: str) -> str:
 
 def translate_stream(text: str, source_code: str, target_code: str):
     prompt = build_prompt(source_code, target_code, text)
-    stream = chat(
+    client = get_ollama_client()
+    stream = client.chat(
         model=MODEL_NAME,
         messages=[{"role": "user", "content": prompt}],
         stream=True,
@@ -107,4 +145,6 @@ def translate():
 
 
 if __name__ == "__main__":
-    app.run(host="127.0.0.1", port=8000)
+    bind_url = os.getenv("FLASK_BIND_ADDR", DEFAULT_BIND_URL)
+    host, port = parse_bind_url(bind_url)
+    app.run(host=host, port=port)
