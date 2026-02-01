@@ -107,7 +107,7 @@ document.addEventListener("keydown", (event) => {
         return;
     }
 
-    if (event.key.toLowerCase() === "l") {
+    if (event.key.toLowerCase() === "k") {
         event.preventDefault();
         swapButton.click();
         return;

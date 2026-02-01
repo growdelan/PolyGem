@@ -41,5 +41,5 @@ uv run src/app.py
 
 ## Skróty klawiaturowe
 - ⌘⏎ / Ctrl+Enter – rozpocznij tłumaczenie
-- ⌘L / Ctrl+L – zamień języki
+- ⌘K / Ctrl+K – zamień języki
 - ⌘⇧C / Ctrl+Shift+C – kopiuj tłumaczenie
