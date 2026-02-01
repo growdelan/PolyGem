@@ -30,7 +30,7 @@ Zakres:
 
 ---
 
-## Milestone 1.0: Podstawowe tłumaczenie z UI (planned)
+## Milestone 1.0: Podstawowe tłumaczenie z UI (done)
 
 Cel:
 - użytkownik może wprowadzić tekst i otrzymać tłumaczenie
