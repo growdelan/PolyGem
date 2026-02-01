@@ -93,8 +93,12 @@ Cel:
 
 Definition of Done:
 - tryb jasny/ciemny zapamiętywany w LocalStorage
+- zapamiętywanie wybranych języków w LocalStorage
 - zapis tłumaczenia do pliku .txt z użyciem okna „Zapisz jako”
+- zaktualizowane instrukcje w README
 
 Zakres:
 - przełącznik light/dark z persistencją
+- zapis/odczyt wybranych języków w LocalStorage
 - akcja eksportu do .txt
+- aktualizacja README o funkcjonalności i skróty
