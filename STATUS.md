@@ -9,7 +9,7 @@
 - Spinner i blokada inputu podczas tłumaczenia
 - Przycisk Swap (zamiana języków i treści)
 - Kopiowanie tłumaczenia do schowka
-- Skróty klawiaturowe (⌘⏎, ⌘L, ⌘⇧C)
+- Skróty klawiaturowe (⌘⏎, ⌘K, ⌘⇧C oraz odpowiedniki Ctrl)
 - Tryb jasny/ciemny z persistencją
 - Zapamiętywanie języków w LocalStorage
 - Export tłumaczenia do pliku `.txt`
@@ -21,6 +21,7 @@
 - Milestone 1.5: streaming i kontrola procesu
 - Milestone 2.0: udogodnienia użytkownika
 - Milestone 2.5: ustawienia i export
+- Milestone 2.6: hotfix skrótu zamiany języków
 
 ## Co jest w trakcie
 
@@ -31,4 +32,4 @@
 - Brak
 
 ## Ostatnie aktualizacje
-- 2026-02-01: zakończono Milestone 2.5
+- 2026-02-01: zakończono Milestone 2.6

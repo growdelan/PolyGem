@@ -102,3 +102,18 @@ Zakres:
 - zapis/odczyt wybranych języków w LocalStorage
 - akcja eksportu do .txt
 - aktualizacja README o funkcjonalności i skróty
+
+---
+
+## Milestone 2.6: Hotfix skrótu zamiany języków (done)
+
+Cel:
+- uniknięcie konfliktu skrótu z przeglądarką
+
+Definition of Done:
+- zamiana języków działa pod skrótem ⌘K / Ctrl+K
+- README zawiera zaktualizowane skróty
+
+Zakres:
+- zmiana skrótu dla akcji Swap z ⌘L / Ctrl+L na ⌘K / Ctrl+K
+- aktualizacja dokumentacji skrótów
