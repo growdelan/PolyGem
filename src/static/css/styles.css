@@ -44,6 +44,9 @@ label {
     text-transform: uppercase;
     letter-spacing: 0.04em;
     color: #5b6472;
+    min-height: 28px;
+    display: flex;
+    align-items: center;
 }
 
 select,
@@ -64,7 +67,10 @@ textarea {
 .swap {
     font-size: 1.4rem;
     color: #7a8598;
-    padding-bottom: 6px;
+    padding: 8px 14px;
+    border-radius: 999px;
+    border: 1px solid #d8dde6;
+    background: #ffffff;
 }
 
 .panels {
@@ -77,6 +83,26 @@ textarea {
     display: flex;
     flex-direction: column;
     gap: 8px;
+}
+
+.panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 32px;
+}
+
+.icon {
+    border: 1px solid #d8dde6;
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 0 10px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    height: 32px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .actions {

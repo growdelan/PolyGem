@@ -2,6 +2,8 @@ const sourceText = document.getElementById("source-text");
 const targetText = document.getElementById("target-text");
 const sourceLang = document.getElementById("source-lang");
 const targetLang = document.getElementById("target-lang");
+const swapButton = document.getElementById("swap");
+const copyButton = document.getElementById("copy");
 const translateButton = document.getElementById("translate");
 const cancelButton = document.getElementById("cancel");
 const spinner = document.getElementById("spinner");
@@ -23,6 +25,53 @@ const setBusy = (busy) => {
 cancelButton.addEventListener("click", () => {
     if (currentController) {
         currentController.abort();
+    }
+});
+
+swapButton.addEventListener("click", () => {
+    const sourceValue = sourceLang.value;
+    sourceLang.value = targetLang.value;
+    targetLang.value = sourceValue;
+
+    const sourceTextValue = sourceText.value;
+    sourceText.value = targetText.value;
+    targetText.value = sourceTextValue;
+});
+
+copyButton.addEventListener("click", async () => {
+    const text = targetText.value;
+    if (!text) {
+        return;
+    }
+
+    try {
+        await navigator.clipboard.writeText(text);
+        setStatus("Skopiowano");
+    } catch (error) {
+        setStatus("Nie udało się skopiować");
+    }
+});
+
+document.addEventListener("keydown", (event) => {
+    if (!event.metaKey) {
+        return;
+    }
+
+    if (event.key === "Enter") {
+        event.preventDefault();
+        translateButton.click();
+        return;
+    }
+
+    if (event.key.toLowerCase() === "l") {
+        event.preventDefault();
+        swapButton.click();
+        return;
+    }
+
+    if (event.shiftKey && event.key.toLowerCase() === "c") {
+        event.preventDefault();
+        copyButton.click();
     }
 });
 

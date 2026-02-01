@@ -69,7 +69,7 @@ Zakres:
 
 ---
 
-## Milestone 2.0: Udogodnienia użytkownika (planned)
+## Milestone 2.0: Udogodnienia użytkownika (done)
 
 Cel:
 - poprawa ergonomii pracy i wygody użycia
