@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, render_template, request
+from flask import Flask, Response, jsonify, render_template, request
 from ollama import chat
 
 MODEL_NAME = "translategemma"
@@ -53,6 +53,17 @@ def translate_text(text: str, source_code: str, target_code: str) -> str:
     return response.message.content
 
 
+def translate_stream(text: str, source_code: str, target_code: str):
+    prompt = build_prompt(source_code, target_code, text)
+    stream = chat(
+        model=MODEL_NAME,
+        messages=[{"role": "user", "content": prompt}],
+        stream=True,
+    )
+    for chunk in stream:
+        yield chunk["message"]["content"]
+
+
 @app.get("/")
 def index():
     return render_template(
@@ -69,9 +80,21 @@ def translate():
     text = payload.get("text", "") or ""
     source_code = payload.get("source_lang", "pl")
     target_code = payload.get("target_lang", "en")
+    stream = bool(payload.get("stream"))
 
     if len(text) > MAX_TEXT_LENGTH:
         return jsonify({"error": "Text too long. Please shorten the input."}), 400
+
+    if stream:
+        try:
+            return Response(
+                translate_stream(text, source_code, target_code),
+                mimetype="text/plain",
+            )
+        except ValueError as exc:
+            return jsonify({"error": str(exc)}), 400
+        except Exception:
+            return jsonify({"error": "Translation failed."}), 500
 
     try:
         translation = translate_text(text, source_code, target_code)

@@ -99,6 +99,10 @@ Każda decyzja powinna zawierać:
   Uzasadnienie: PRD podaje zakres 10–20 tys. znaków bez dokładnej granicy, wybrano górny limit jako najprostsze założenie.
   Konsekwencje: Dłuższe teksty są odrzucane z komunikatem „Text too long. Please shorten the input.”
 
+- Decyzja: Streaming realizowany jest jako strumień tekstowy HTTP z jednego endpointu `/translate`.
+  Uzasadnienie: PRD nie narzuca formatu transportu, wybrano najprostszą formę bez dodatkowych protokołów.
+  Konsekwencje: Klient odbiera surowe fragmenty tekstu i może przerwać połączenie (Cancel) przez anulowanie żądania.
+
 ---
 
 ## Jakość i kryteria akceptacji

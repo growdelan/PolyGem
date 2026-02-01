@@ -50,7 +50,7 @@ Zakres:
 
 ---
 
-## Milestone 1.5: Streaming i kontrola procesu (planned)
+## Milestone 1.5: Streaming i kontrola procesu (done)
 
 Cel:
 - tłumaczenie działa w trybie streamingu

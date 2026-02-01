@@ -100,9 +100,39 @@ button:disabled {
     cursor: not-allowed;
 }
 
+button.secondary {
+    background: #e4e9f2;
+    color: #1b1f24;
+}
+
+button.secondary:disabled {
+    background: #e4e9f2;
+    color: #8a94a6;
+}
+
 .status {
     color: #5b6472;
     font-size: 0.95rem;
+}
+
+.spinner {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 2px solid #c9d3e3;
+    border-top-color: #1f6feb;
+    display: none;
+    animation: spin 0.8s linear infinite;
+}
+
+.spinner.active {
+    display: inline-block;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 @media (max-width: 760px) {
