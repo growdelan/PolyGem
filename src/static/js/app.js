@@ -4,12 +4,26 @@ const sourceLang = document.getElementById("source-lang");
 const targetLang = document.getElementById("target-lang");
 const swapButton = document.getElementById("swap");
 const copyButton = document.getElementById("copy");
+const exportButton = document.getElementById("export");
+const themeToggle = document.getElementById("theme-toggle");
 const translateButton = document.getElementById("translate");
 const cancelButton = document.getElementById("cancel");
 const spinner = document.getElementById("spinner");
 const statusLabel = document.getElementById("status");
 
 let currentController = null;
+let currentTheme = "light";
+
+const applyTheme = (theme) => {
+    document.body.classList.toggle("theme-dark", theme === "dark");
+    themeToggle.textContent = theme === "dark" ? "Tryb jasny" : "Tryb ciemny";
+    currentTheme = theme;
+};
+
+const saveLanguages = () => {
+    localStorage.setItem("source_lang", sourceLang.value);
+    localStorage.setItem("target_lang", targetLang.value);
+};
 
 const setStatus = (message) => {
     statusLabel.textContent = message;
@@ -28,6 +42,12 @@ cancelButton.addEventListener("click", () => {
     }
 });
 
+themeToggle.addEventListener("click", () => {
+    const nextTheme = currentTheme === "dark" ? "light" : "dark";
+    applyTheme(nextTheme);
+    localStorage.setItem("theme", nextTheme);
+});
+
 swapButton.addEventListener("click", () => {
     const sourceValue = sourceLang.value;
     sourceLang.value = targetLang.value;
@@ -36,7 +56,12 @@ swapButton.addEventListener("click", () => {
     const sourceTextValue = sourceText.value;
     sourceText.value = targetText.value;
     targetText.value = sourceTextValue;
+
+    saveLanguages();
 });
+
+sourceLang.addEventListener("change", saveLanguages);
+targetLang.addEventListener("change", saveLanguages);
 
 copyButton.addEventListener("click", async () => {
     const text = targetText.value;
@@ -52,8 +77,27 @@ copyButton.addEventListener("click", async () => {
     }
 });
 
+exportButton.addEventListener("click", () => {
+    const text = targetText.value;
+    if (!text) {
+        return;
+    }
+
+    const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "translation.txt";
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    URL.revokeObjectURL(url);
+    setStatus("Zapisano");
+});
+
 document.addEventListener("keydown", (event) => {
-    if (!event.metaKey) {
+    const isCommand = event.metaKey || event.ctrlKey;
+    if (!isCommand) {
         return;
     }
 
@@ -72,6 +116,24 @@ document.addEventListener("keydown", (event) => {
     if (event.shiftKey && event.key.toLowerCase() === "c") {
         event.preventDefault();
         copyButton.click();
+    }
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+    const storedTheme = localStorage.getItem("theme");
+    if (storedTheme === "dark" || storedTheme === "light") {
+        applyTheme(storedTheme);
+    } else {
+        applyTheme("light");
+    }
+
+    const storedSource = localStorage.getItem("source_lang");
+    const storedTarget = localStorage.getItem("target_lang");
+    if (storedSource) {
+        sourceLang.value = storedSource;
+    }
+    if (storedTarget) {
+        targetLang.value = storedTarget;
     }
 });
 

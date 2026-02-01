@@ -86,15 +86,19 @@ Zakres:
 
 ---
 
-## Milestone 2.5: Ustawienia i export (planned)
+## Milestone 2.5: Ustawienia i export (done)
 
 Cel:
 - zachowanie preferencji i zapis tłumaczenia do pliku
 
 Definition of Done:
 - tryb jasny/ciemny zapamiętywany w LocalStorage
+- zapamiętywanie wybranych języków w LocalStorage
 - zapis tłumaczenia do pliku .txt z użyciem okna „Zapisz jako”
+- zaktualizowane instrukcje w README
 
 Zakres:
 - przełącznik light/dark z persistencją
+- zapis/odczyt wybranych języków w LocalStorage
 - akcja eksportu do .txt
+- aktualizacja README o funkcjonalności i skróty
