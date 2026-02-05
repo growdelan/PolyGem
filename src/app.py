@@ -2,6 +2,7 @@ import os
 from urllib.parse import urlparse
 
 from flask import Flask, Response, jsonify, render_template, request
+from dotenv import load_dotenv
 from ollama import Client
 
 MODEL_NAME = "translategemma"
@@ -23,6 +24,7 @@ LANGUAGES = [
 
 app = Flask(__name__, template_folder="templates", static_folder="static")
 _ollama_client = None
+load_dotenv()
 
 
 def get_language_name(code: str) -> str | None:

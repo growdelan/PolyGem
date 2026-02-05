@@ -44,6 +44,13 @@ uv run src/app.py
 - `OLLAMA_CUSTOM_ADDR` – opcjonalny adres serwera Ollama (domyślnie lokalny).
 - `OLLAMA_VERYFI_SSL` – ustaw `false/0/no`, aby wyłączyć weryfikację certyfikatu TLS.
 
+## Przykład `.env`
+```
+FLASK_BIND_ADDR=http://127.0.0.1:8000
+OLLAMA_CUSTOM_ADDR=http://127.0.0.1:11434
+OLLAMA_VERYFI_SSL=true
+```
+
 ## Skróty klawiaturowe
 - ⌘⏎ / Ctrl+Enter – rozpocznij tłumaczenie
 - ⌘K / Ctrl+K – zamień języki

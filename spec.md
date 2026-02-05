@@ -33,6 +33,9 @@ Nowa funkcjonalność (PRD 001):
 - konfiguracja adresu serwera Ollama przez zmienną środowiskową
 - opcjonalne wyłączenie weryfikacji certyfikatu TLS przez zmienną środowiskową
 
+Nowa funkcjonalność (PRD 002):
+- wczytywanie konfiguracji z pliku `.env` przez `python-dotenv`
+
 Czego aplikacja nie robi:
 - brak historii i cache
 - brak autodetekcji języka
@@ -66,6 +69,9 @@ Opis architektury na poziomie koncepcyjnym.
 Nowa funkcjonalność (PRD 001):
 - backend odczytuje konfigurację adresu Ollama i ustawień TLS z zmiennych środowiskowych
 
+Nowa funkcjonalność (PRD 002):
+- backend wczytuje `.env` na starcie i łączy konfigurację z env systemowym
+
 ---
 
 ## Komponenty techniczne
@@ -77,6 +83,7 @@ Lista kluczowych komponentów technicznych i ich odpowiedzialności.
 - LocalStorage: zapis preferencji języków i trybu jasny/ciemny
 - Konfiguracja środowiskowa: ustawienie adresu Ollama i weryfikacji TLS
 - Konfiguracja środowiskowa: ustawienie adresu startu serwera Flask
+- Konfiguracja środowiskowa: wczytywanie `.env` przez `python-dotenv`
 
 ---
 
@@ -119,6 +126,10 @@ Każda decyzja powinna zawierać:
 - Decyzja: Adres startu serwera Flask może być ustawiany przez `FLASK_BIND_ADDR`.
   Uzasadnienie: Wymaganie umożliwienia uruchomienia aplikacji pod innym adresem bez zmian w kodzie.
   Konsekwencje: Parametry host/port są pobierane z URL; domyślnie pozostaje `http://127.0.0.1:8000`.
+
+- Decyzja (PRD 002): Konfiguracja wczytywana z `.env` przez `python-dotenv`, z priorytetem zmiennych systemowych.
+  Uzasadnienie: PRD wymaga uproszczenia konfiguracji przy zachowaniu nadpisywania przez env systemowy.
+  Konsekwencje: `python-dotenv` staje się zależnością projektu; `.env` nie jest wersjonowany.
 
 ---
 
