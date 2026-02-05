@@ -136,3 +136,20 @@ Zakres:
 - przekazanie konfiguracji do klienta Ollama
 - odczyt zmiennej środowiskowej dla adresu startu Flask
 - aktualizacja dokumentacji uruchomienia
+
+---
+
+## Milestone 3.1: Konfiguracja przez `.env` (done)
+
+Cel:
+- wczytywanie konfiguracji z pliku `.env` bez zmian w UI
+
+Definition of Done:
+- aplikacja ładuje `.env` przez `python-dotenv`
+- zmienne systemowe mają priorytet nad `.env`
+- README zawiera przykład `.env` i listę obsługiwanych zmiennych
+
+Zakres:
+- dodanie obsługi `python-dotenv` przy starcie aplikacji
+- uporządkowanie priorytetu konfiguracji `.env` vs env systemowy
+- aktualizacja dokumentacji uruchomienia
