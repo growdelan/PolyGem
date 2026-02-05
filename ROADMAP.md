@@ -81,7 +81,7 @@ Definition of Done:
 
 Zakres:
 - logika zamiany języków i treści pól
-- obsługa skrótów ⌘⏎, ⌘L, ⌘⇧C
+- obsługa skrótów ⌘⏎, ⌘K, ⌘⇧C
 - ikona kopiowania przy wyniku
 
 ---
@@ -153,3 +153,20 @@ Zakres:
 - dodanie obsługi `python-dotenv` przy starcie aplikacji
 - uporządkowanie priorytetu konfiguracji `.env` vs env systemowy
 - aktualizacja dokumentacji uruchomienia
+
+---
+
+## Milestone 3.2: Panel skrótów w UI (done)
+
+Cel:
+- poprawa odkrywalności skrótów klawiaturowych w aplikacji
+
+Definition of Done:
+- w UI pojawia się panel ze skrótami w wyznaczonym miejscu
+- wygląd panelu jest spójny z resztą aplikacji
+- tekst panelu jest lekko wyszarzony
+- lista skrótów zawiera: ⌘⏎/Ctrl+Enter, ⌘K/Ctrl+K, ⌘⇧C/Ctrl+Shift+C
+
+Zakres:
+- dodanie sekcji informacyjnej w layoutcie strony
+- stylowanie panelu i typografii
