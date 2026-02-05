@@ -36,6 +36,9 @@ Nowa funkcjonalność (PRD 001):
 Nowa funkcjonalność (PRD 002):
 - wczytywanie konfiguracji z pliku `.env` przez `python-dotenv`
 
+Nowa funkcjonalność (PRD 003):
+- panel informacyjny ze skrótami klawiaturowymi w UI
+
 Czego aplikacja nie robi:
 - brak historii i cache
 - brak autodetekcji języka
@@ -72,6 +75,9 @@ Nowa funkcjonalność (PRD 001):
 Nowa funkcjonalność (PRD 002):
 - backend wczytuje `.env` na starcie i łączy konfigurację z env systemowym
 
+Nowa funkcjonalność (PRD 003):
+- UI prezentuje panel ze skrótami w szarej części tła
+
 ---
 
 ## Komponenty techniczne
@@ -84,6 +90,7 @@ Lista kluczowych komponentów technicznych i ich odpowiedzialności.
 - Konfiguracja środowiskowa: ustawienie adresu Ollama i weryfikacji TLS
 - Konfiguracja środowiskowa: ustawienie adresu startu serwera Flask
 - Konfiguracja środowiskowa: wczytywanie `.env` przez `python-dotenv`
+- Panel UI: statyczna sekcja ze skrótami klawiaturowymi
 
 ---
 
@@ -130,6 +137,10 @@ Każda decyzja powinna zawierać:
 - Decyzja (PRD 002): Konfiguracja wczytywana z `.env` przez `python-dotenv`, z priorytetem zmiennych systemowych.
   Uzasadnienie: PRD wymaga uproszczenia konfiguracji przy zachowaniu nadpisywania przez env systemowy.
   Konsekwencje: `python-dotenv` staje się zależnością projektu; `.env` nie jest wersjonowany.
+
+- Decyzja (PRD 003): Panel skrótów to statyczny element UI z lekko wyszarzanym tekstem.
+  Uzasadnienie: PRD wymaga czytelnej, nienachalnej informacji w tle bez zmian logiki aplikacji.
+  Konsekwencje: Brak dodatkowych zależności; utrzymanie listy skrótów w UI.
 
 ---
 

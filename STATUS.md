@@ -16,6 +16,7 @@
 - Konfiguracja adresu Ollama przez zmienną środowiskową
 - Opcjonalne wyłączenie weryfikacji TLS dla Ollama
 - Konfiguracja przez `.env` (python-dotenv)
+- Panel skrótów klawiaturowych w UI
 - Testy `unittest` przechodzą
 
 ## Co jest skończone
@@ -27,6 +28,7 @@
 - Milestone 2.6: hotfix skrótu zamiany języków
 - Milestone 3.0: konfigurowalny adres Ollama
 - Milestone 3.1: konfiguracja przez `.env`
+- Milestone 3.2: panel skrótów w UI
 
 ## Co jest w trakcie
 
@@ -37,4 +39,4 @@
 - Brak
 
 ## Ostatnie aktualizacje
-- 2026-02-01: zakończono Milestone 3.1
+- 2026-02-01: zakończono Milestone 3.2
