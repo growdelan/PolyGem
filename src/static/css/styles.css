@@ -48,6 +48,46 @@ body {
     gap: 24px;
 }
 
+.shortcuts-panel {
+    max-width: 720px;
+    margin: 0 auto 48px;
+    padding: 18px 24px;
+    border-radius: 14px;
+    background: color-mix(in srgb, var(--bg) 88%, var(--card));
+    border: 1px solid color-mix(in srgb, var(--border) 70%, transparent);
+    color: var(--muted);
+    font-size: 0.95rem;
+}
+
+.shortcuts-panel h2 {
+    margin: 0 0 10px;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--muted);
+}
+
+.shortcuts-panel ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 8px;
+}
+
+.shortcuts-panel li {
+    display: flex;
+    gap: 10px;
+    align-items: baseline;
+    line-height: 1.4;
+}
+
+.shortcuts-panel .shortcut {
+    min-width: 190px;
+    font-weight: 600;
+    color: color-mix(in srgb, var(--muted) 85%, var(--text));
+}
+
 .toolbar {
     display: grid;
     grid-template-columns: 1fr auto 1fr;
@@ -211,5 +251,18 @@ button.secondary:disabled {
 
     .panels {
         grid-template-columns: 1fr;
+    }
+
+    .shortcuts-panel {
+        margin: 0 16px 40px;
+    }
+
+    .shortcuts-panel li {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .shortcuts-panel .shortcut {
+        min-width: 0;
     }
 }
