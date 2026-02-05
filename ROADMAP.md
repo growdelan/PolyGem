@@ -139,7 +139,7 @@ Zakres:
 
 ---
 
-## Milestone 3.1: Konfiguracja przez `.env` (planned)
+## Milestone 3.1: Konfiguracja przez `.env` (done)
 
 Cel:
 - wczytywanie konfiguracji z pliku `.env` bez zmian w UI

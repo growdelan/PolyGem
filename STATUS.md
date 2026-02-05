@@ -15,6 +15,7 @@
 - Export tłumaczenia do pliku `.txt`
 - Konfiguracja adresu Ollama przez zmienną środowiskową
 - Opcjonalne wyłączenie weryfikacji TLS dla Ollama
+- Konfiguracja przez `.env` (python-dotenv)
 - Testy `unittest` przechodzą
 
 ## Co jest skończone
@@ -25,6 +26,7 @@
 - Milestone 2.5: ustawienia i export
 - Milestone 2.6: hotfix skrótu zamiany języków
 - Milestone 3.0: konfigurowalny adres Ollama
+- Milestone 3.1: konfiguracja przez `.env`
 
 ## Co jest w trakcie
 
@@ -35,4 +37,4 @@
 - Brak
 
 ## Ostatnie aktualizacje
-- 2026-02-01: zakończono Milestone 3.0
+- 2026-02-01: zakończono Milestone 3.1
