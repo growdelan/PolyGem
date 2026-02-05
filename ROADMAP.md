@@ -81,7 +81,7 @@ Definition of Done:
 
 Zakres:
 - logika zamiany języków i treści pól
-- obsługa skrótów ⌘⏎, ⌘L, ⌘⇧C
+- obsługa skrótów ⌘⏎, ⌘K, ⌘⇧C
 - ikona kopiowania przy wyniku
 
 ---
