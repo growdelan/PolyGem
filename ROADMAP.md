@@ -230,3 +230,23 @@ Zakres:
 - dodanie nowej sekcji HTML `footer.footer` pod panelem skrótów
 - dodanie struktury `footer-inner`, `footer-separator`, `footer-link`
 - dodanie styli CSS dla stopki i stanu hover linku
+
+---
+
+## Milestone 3.6: Ikona X w sekcji social i stopce (done)
+
+Cel:
+- rozszerzyć sekcję social nad kartą tłumaczeń o ikonę platformy X obok GitHub
+- dodać spójny link X także w stopce aplikacji
+
+Definition of Done:
+- nad sekcją tłumaczeń istnieje wrapper `page-social` zawierający ikony GitHub i X
+- kliknięcie ikony X otwiera `https://x.com/growdelan` w nowej karcie
+- pozycja sekcji social pozostaje taka sama jak dotychczas dla ikony GitHub
+- stopka zawiera dodatkowy link `X` obok linku `GitHub`
+- zmiana nie wpływa na logikę tłumaczenia, streaming i backend
+
+Zakres:
+- zastąpienie pojedynczego przycisku GitHub wrapperem social z dwoma ikonami
+- dodanie stylu pozycjonowania `page-social` i odstępu między ikonami
+- dodanie obsługi kliknięcia dla przycisku X oraz linku X w stopce

@@ -6,6 +6,7 @@ const swapButton = document.getElementById("swap");
 const copyButton = document.getElementById("copy");
 const exportButton = document.getElementById("export");
 const githubButton = document.getElementById("github");
+const xButton = document.getElementById("x");
 const themeToggle = document.getElementById("theme-toggle");
 const translateButton = document.getElementById("translate");
 const cancelButton = document.getElementById("cancel");
@@ -106,6 +107,12 @@ exportButton.addEventListener("click", () => {
 if (githubButton) {
     githubButton.addEventListener("click", () => {
         window.open("https://github.com/growdelan/PolyGem", "_blank", "noopener,noreferrer");
+    });
+}
+
+if (xButton) {
+    xButton.addEventListener("click", () => {
+        window.open("https://x.com/growdelan", "_blank", "noopener,noreferrer");
     });
 }
 

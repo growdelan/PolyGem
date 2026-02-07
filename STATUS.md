@@ -21,7 +21,8 @@
 - Stany interakcji przycisków ikon: hover, focus-visible, active
 - Krótki stan sukcesu przycisków po akcjach kopiowania i zapisu
 - Ikona GitHub nad kartą tłumaczeń (prawy górny róg kontenera aplikacji)
-- Subtelna stopka pod panelem skrótów (autor + link GitHub)
+- Ikona X obok GitHub w sekcji social nad kartą tłumaczeń
+- Subtelna stopka pod panelem skrótów (autor + linki GitHub oraz X)
 - Testy `unittest` przechodzą
 
 ## Co jest skończone
@@ -37,6 +38,7 @@
 - Milestone 3.3: outline SVG dla ikon akcji
 - Milestone 3.4: ikona GitHub nad kartą tłumaczeń
 - Milestone 3.5: subtelna stopka pod panelem skrótów
+- Milestone 3.6: ikona X w sekcji social i stopce
 
 ## Co jest w trakcie
 
@@ -51,3 +53,4 @@
 - 2026-02-07: zakończono Milestone 3.3
 - 2026-02-07: zakończono Milestone 3.4
 - 2026-02-07: zakończono Milestone 3.5
+- 2026-02-07: zakończono Milestone 3.6

@@ -51,6 +51,10 @@ Nowa funkcjonalność (PRD 006):
 - dodanie subtelnej stopki jako osobnej sekcji pod panelem skrótów
 - prezentacja informacji o autorze i linku GitHub w lekkiej formie wizualnej
 
+Nowa funkcjonalność (PRD 007):
+- dodanie ikony X obok GitHub w sekcji social nad kartą tłumaczeń
+- dodanie linku X w stopce obok linku GitHub
+
 Czego aplikacja nie robi:
 - brak historii i cache
 - brak autodetekcji języka
@@ -102,6 +106,10 @@ Nowa funkcjonalność (PRD 006):
 - UI renderuje osobną sekcję `<footer class="footer">` pod panelem skrótów
 - UI prezentuje w stopce tekst autora, separator i link GitHub otwierany w nowej karcie
 
+Nowa funkcjonalność (PRD 007):
+- UI renderuje wrapper `page-social` z ikonami `github` i `x` nad sekcją tłumaczeń
+- UI otwiera link `https://x.com/growdelan` z ikony X i udostępnia link X w stopce
+
 ---
 
 ## Komponenty techniczne
@@ -119,6 +127,7 @@ Lista kluczowych komponentów technicznych i ich odpowiedzialności.
 - Warstwa stanów UI: style interakcji przycisków ikon i chwilowy stan sukcesu po akcji
 - Nawigacja zewnętrzna UI: przycisk GitHub osadzony nad kartą tłumaczeń, w prawym górnym rogu kontenera `.app`
 - Stopka UI: osobna sekcja pod panelem skrótów z informacją o autorze i linkiem GitHub
+- Sekcja social UI: grupa ikon GitHub/X nad kartą tłumaczeń oraz linki GitHub/X w stopce
 
 ---
 
@@ -194,6 +203,14 @@ Każda decyzja powinna zawierać:
   Uzasadnienie: PRD wymaga lekkiej wizualnie sekcji informacyjnej, spójnej z light/dark mode i bez rozbudowy nawigacji.
   Konsekwencje: Brak nowych zależności; utrzymanie prostego, statycznego komponentu UI.
 
+- Decyzja (PRD 007): Ikony social nad kartą tłumaczeń są grupowane we wrapperze `page-social` zamiast pojedynczego przycisku pozycyjnego.
+  Uzasadnienie: PRD wymaga równoległego wyświetlenia ikon GitHub i X w tej samej pozycji UI, z zachowaniem spójnego pozycjonowania.
+  Konsekwencje: Zmiana ogranicza się do warstwy UI (HTML/CSS); brak wpływu na backend i logikę tłumaczenia.
+
+- Decyzja (PRD 007): Link X jest udostępniany zarówno w górnej sekcji social, jak i w stopce.
+  Uzasadnienie: PRD wymaga spójnej obecności kanału X w obu miejscach nawigacji zewnętrznej.
+  Konsekwencje: Brak nowych zależności; rozszerzenie istniejącej nawigacji zewnętrznej o dodatkowy link.
+
 ---
 
 ## Jakość i kryteria akceptacji
@@ -227,4 +244,4 @@ Wspólne wymagania jakościowe dla całego projektu.
 
 - Data utworzenia: 2026-02-01
 - Ostatnia aktualizacja: 2026-02-07
-- Aktualny zakres obowiązywania: MVP (v1) zgodnie z PRD 000-initial-prd.md oraz rozszerzeniami PRD 001-006
+- Aktualny zakres obowiązywania: MVP (v1) zgodnie z PRD 000-initial-prd.md oraz rozszerzeniami PRD 001-007

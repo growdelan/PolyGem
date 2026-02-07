@@ -62,11 +62,13 @@ body {
     box-sizing: border-box;
 }
 
-.page-github {
+.page-social {
     position: absolute;
     top: -42px;
     right: 0;
     z-index: 20;
+    display: inline-flex;
+    gap: 8px;
 }
 
 .shortcuts-panel h2 {
