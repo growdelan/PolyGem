@@ -210,3 +210,23 @@ Zakres:
 - dodanie przycisku GitHub nad kartą tłumaczeń, w prawym górnym rogu kontenera `.app`
 - osadzenie ikony GitHub jako outline SVG
 - pozycjonowanie przycisku względem kontenera `.app` i podpięcie akcji otwarcia linku
+
+---
+
+## Milestone 3.5: Subtelna stopka pod panelem skrótów (done)
+
+Cel:
+- dodać estetyczną, lekką wizualnie stopkę jako osobną sekcję pod panelem skrótów
+- uporządkować dolną część layoutu przez wyraźne rozdzielenie sekcji treści i stopki
+
+Definition of Done:
+- struktura strony ma kolejność: `main.app`, `section.shortcuts-panel`, `footer.footer`
+- stopka zawiera tekst `© 2026 Daniel Wyrzyński`, separator `•` i link `GitHub`
+- link `GitHub` otwiera się w nowej karcie i używa `rel="noopener"`
+- styl stopki jest subtelny, wyśrodkowany i spójny z light/dark mode
+- zmiana nie wpływa na logikę tłumaczenia, streaming i backend
+
+Zakres:
+- dodanie nowej sekcji HTML `footer.footer` pod panelem skrótów
+- dodanie struktury `footer-inner`, `footer-separator`, `footer-link`
+- dodanie styli CSS dla stopki i stanu hover linku

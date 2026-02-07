@@ -99,6 +99,34 @@ body {
     color: color-mix(in srgb, var(--muted) 85%, var(--text));
 }
 
+.footer {
+    margin: 32px 0 40px;
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--muted);
+}
+
+.footer-inner {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    opacity: 0.8;
+}
+
+.footer-link {
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 150ms ease;
+}
+
+.footer-link:hover {
+    color: var(--text);
+}
+
+.footer-separator {
+    opacity: 0.5;
+}
+
 .toolbar {
     display: grid;
     grid-template-columns: 1fr auto 1fr;
@@ -311,5 +339,9 @@ button.secondary:disabled {
 
     .shortcuts-panel .shortcut {
         min-width: 0;
+    }
+
+    .footer {
+        margin: 24px 16px 32px;
     }
 }
