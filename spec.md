@@ -47,6 +47,10 @@ Nowa funkcjonalność (PRD 005):
 - dodanie przycisku GitHub nad kartą tłumaczeń, w prawym górnym rogu kontenera aplikacji
 - otwieranie repozytorium projektu w nowej karcie przez ikonę outline SVG
 
+Nowa funkcjonalność (PRD 006):
+- dodanie subtelnej stopki jako osobnej sekcji pod panelem skrótów
+- prezentacja informacji o autorze i linku GitHub w lekkiej formie wizualnej
+
 Czego aplikacja nie robi:
 - brak historii i cache
 - brak autodetekcji języka
@@ -94,6 +98,10 @@ Nowa funkcjonalność (PRD 005):
 - UI renderuje przycisk `github` jako ikonę outline SVG nad kartą tłumaczeń (prawy górny róg kontenera `.app`)
 - UI otwiera link do repozytorium projektu w nowej karcie bez ingerencji w przepływ tłumaczenia
 
+Nowa funkcjonalność (PRD 006):
+- UI renderuje osobną sekcję `<footer class="footer">` pod panelem skrótów
+- UI prezentuje w stopce tekst autora, separator i link GitHub otwierany w nowej karcie
+
 ---
 
 ## Komponenty techniczne
@@ -110,6 +118,7 @@ Lista kluczowych komponentów technicznych i ich odpowiedzialności.
 - System ikon UI: inline SVG dla akcji kopiowania i zapisu z kolorowaniem przez `currentColor`
 - Warstwa stanów UI: style interakcji przycisków ikon i chwilowy stan sukcesu po akcji
 - Nawigacja zewnętrzna UI: przycisk GitHub osadzony nad kartą tłumaczeń, w prawym górnym rogu kontenera `.app`
+- Stopka UI: osobna sekcja pod panelem skrótów z informacją o autorze i linkiem GitHub
 
 ---
 
@@ -177,6 +186,14 @@ Każda decyzja powinna zawierać:
   Uzasadnienie: PRD wymaga spójności wizualnej z wcześniej wdrożonym systemem ikon i obsługi motywów przez `currentColor`.
   Konsekwencje: Brak nowych zależności i brak duplikacji stylowania ikon.
 
+- Decyzja (PRD 006): Stopka jest realizowana jako osobna sekcja `<footer>` pod panelem skrótów.
+  Uzasadnienie: PRD wymaga wyraźnego wydzielenia strukturalnego stopki i zachowania kolejności sekcji layoutu strony.
+  Konsekwencje: Zmiana dotyczy wyłącznie warstwy UI (HTML/CSS); brak wpływu na backend i logikę tłumaczenia.
+
+- Decyzja (PRD 006): Stopka ma subtelny styl oparty o `--muted` i zawiera pojedynczy link zewnętrzny `GitHub`.
+  Uzasadnienie: PRD wymaga lekkiej wizualnie sekcji informacyjnej, spójnej z light/dark mode i bez rozbudowy nawigacji.
+  Konsekwencje: Brak nowych zależności; utrzymanie prostego, statycznego komponentu UI.
+
 ---
 
 ## Jakość i kryteria akceptacji
@@ -210,4 +227,4 @@ Wspólne wymagania jakościowe dla całego projektu.
 
 - Data utworzenia: 2026-02-01
 - Ostatnia aktualizacja: 2026-02-07
-- Aktualny zakres obowiązywania: MVP (v1) zgodnie z PRD 000-initial-prd.md oraz rozszerzeniami PRD 001-005
+- Aktualny zakres obowiązywania: MVP (v1) zgodnie z PRD 000-initial-prd.md oraz rozszerzeniami PRD 001-006
