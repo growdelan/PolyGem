@@ -190,3 +190,23 @@ Zakres:
 - podmiana zawartości przycisków ikon w HTML na inline SVG
 - dopisanie styli `.icon`, `.icon-svg` oraz stanu `.icon.success` w CSS
 - dodanie krótkiej logiki JS do czasowego oznaczenia sukcesu dla akcji copy/export
+
+---
+
+## Milestone 3.4: Ikona GitHub nad kartą tłumaczeń (done)
+
+Cel:
+- dodać szybki dostęp do repozytorium projektu z poziomu interfejsu
+- zachować spójność wizualną z istniejącymi ikonami outline SVG
+
+Definition of Done:
+- nad kartą tłumaczeń, w prawym górnym rogu kontenera aplikacji, znajduje się przycisk `github`
+- przycisk otwiera `https://github.com/growdelan/PolyGem` w nowej karcie
+- przycisk wykorzystuje inline SVG i klasy `.icon` oraz `.icon-svg`
+- rozwiązanie działa poprawnie w light i dark mode
+- obszar tłumaczeń i logika tłumaczenia pozostają bez zmian
+
+Zakres:
+- dodanie przycisku GitHub nad kartą tłumaczeń, w prawym górnym rogu kontenera `.app`
+- osadzenie ikony GitHub jako outline SVG
+- pozycjonowanie przycisku względem kontenera `.app` i podpięcie akcji otwarcia linku

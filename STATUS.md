@@ -20,6 +20,7 @@
 - Ikony akcji Kopiuj/Zapisz jako outline SVG (zamiast emoji)
 - Stany interakcji przycisków ikon: hover, focus-visible, active
 - Krótki stan sukcesu przycisków po akcjach kopiowania i zapisu
+- Ikona GitHub nad kartą tłumaczeń (prawy górny róg kontenera aplikacji)
 - Testy `unittest` przechodzą
 
 ## Co jest skończone
@@ -33,6 +34,7 @@
 - Milestone 3.1: konfiguracja przez `.env`
 - Milestone 3.2: panel skrótów w UI
 - Milestone 3.3: outline SVG dla ikon akcji
+- Milestone 3.4: ikona GitHub nad kartą tłumaczeń
 
 ## Co jest w trakcie
 
@@ -45,3 +47,4 @@
 ## Ostatnie aktualizacje
 - 2026-02-01: zakończono Milestone 3.2
 - 2026-02-07: zakończono Milestone 3.3
+- 2026-02-07: zakończono Milestone 3.4

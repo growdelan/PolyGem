@@ -37,6 +37,7 @@ body {
 }
 
 .app {
+    position: relative;
     max-width: 960px;
     margin: 40px auto;
     padding: 24px;
@@ -59,6 +60,13 @@ body {
     color: var(--muted);
     font-size: 0.95rem;
     box-sizing: border-box;
+}
+
+.page-github {
+    position: absolute;
+    top: -42px;
+    right: 0;
+    z-index: 20;
 }
 
 .shortcuts-panel h2 {

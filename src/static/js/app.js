@@ -5,6 +5,7 @@ const targetLang = document.getElementById("target-lang");
 const swapButton = document.getElementById("swap");
 const copyButton = document.getElementById("copy");
 const exportButton = document.getElementById("export");
+const githubButton = document.getElementById("github");
 const themeToggle = document.getElementById("theme-toggle");
 const translateButton = document.getElementById("translate");
 const cancelButton = document.getElementById("cancel");
@@ -101,6 +102,12 @@ exportButton.addEventListener("click", () => {
     setStatus("Zapisano");
     pulseSuccess(exportButton);
 });
+
+if (githubButton) {
+    githubButton.addEventListener("click", () => {
+        window.open("https://github.com/growdelan/PolyGem", "_blank", "noopener,noreferrer");
+    });
+}
 
 document.addEventListener("keydown", (event) => {
     const isCommand = event.metaKey || event.ctrlKey;
