@@ -39,6 +39,10 @@ Nowa funkcjonalność (PRD 002):
 Nowa funkcjonalność (PRD 003):
 - panel informacyjny ze skrótami klawiaturowymi w UI
 
+Nowa funkcjonalność (PRD 004):
+- zastąpienie emoji w akcjach kopiowania i zapisu ikonami outline SVG
+- dodanie stanów interakcji przycisków ikon (hover/focus/active) oraz krótkiego stanu sukcesu po akcji
+
 Czego aplikacja nie robi:
 - brak historii i cache
 - brak autodetekcji języka
@@ -78,6 +82,10 @@ Nowa funkcjonalność (PRD 002):
 Nowa funkcjonalność (PRD 003):
 - UI prezentuje panel ze skrótami w szarej części tła
 
+Nowa funkcjonalność (PRD 004):
+- UI renderuje przyciski `copy` i `export` jako inline SVG sterowane `currentColor`
+- UI dodaje chwilowy stan wizualny sukcesu akcji kopiowania i zapisu bez zmian przepływu danych
+
 ---
 
 ## Komponenty techniczne
@@ -91,6 +99,8 @@ Lista kluczowych komponentów technicznych i ich odpowiedzialności.
 - Konfiguracja środowiskowa: ustawienie adresu startu serwera Flask
 - Konfiguracja środowiskowa: wczytywanie `.env` przez `python-dotenv`
 - Panel UI: statyczna sekcja ze skrótami klawiaturowymi
+- System ikon UI: inline SVG dla akcji kopiowania i zapisu z kolorowaniem przez `currentColor`
+- Warstwa stanów UI: style interakcji przycisków ikon i chwilowy stan sukcesu po akcji
 
 ---
 
@@ -142,6 +152,14 @@ Każda decyzja powinna zawierać:
   Uzasadnienie: PRD wymaga czytelnej, nienachalnej informacji w tle bez zmian logiki aplikacji.
   Konsekwencje: Brak dodatkowych zależności; utrzymanie listy skrótów w UI.
 
+- Decyzja (PRD 004): Ikony akcji Kopiuj/Zapisz są realizowane jako inline SVG w stylu outline i kolorowane przez `currentColor`.
+  Uzasadnienie: PRD wymaga wizualnej spójności z istniejącym layoutem i pełnej kontroli stanów przez CSS bez nowych bibliotek.
+  Konsekwencje: Brak nowych zależności; aktualizacja HTML/CSS dla przycisków ikon.
+
+- Decyzja (PRD 004): Potwierdzenie powodzenia akcji Kopiuj/Zapisz realizowane jest krótką klasą stanu `.success` po stronie UI.
+  Uzasadnienie: PRD wymaga subtelnego feedbacku bez zmiany layoutu i bez zmian w logice tłumaczenia.
+  Konsekwencje: Drobna logika JS dla czasowego przełączania klasy; zachowanie dotychczasowych komunikatów statusu.
+
 ---
 
 ## Jakość i kryteria akceptacji
@@ -174,5 +192,5 @@ Wspólne wymagania jakościowe dla całego projektu.
 - Aktualny zakres obowiązywania:
 
 - Data utworzenia: 2026-02-01
-- Ostatnia aktualizacja: 2026-02-01
-- Aktualny zakres obowiązywania: MVP (v1) zgodnie z PRD 000-initial-prd.md
+- Ostatnia aktualizacja: 2026-02-07
+- Aktualny zakres obowiązywania: MVP (v1) zgodnie z PRD 000-initial-prd.md oraz rozszerzeniami PRD 001-004
