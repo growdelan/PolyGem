@@ -43,6 +43,10 @@ Nowa funkcjonalność (PRD 004):
 - zastąpienie emoji w akcjach kopiowania i zapisu ikonami outline SVG
 - dodanie stanów interakcji przycisków ikon (hover/focus/active) oraz krótkiego stanu sukcesu po akcji
 
+Nowa funkcjonalność (PRD 005):
+- dodanie przycisku GitHub nad kartą tłumaczeń, w prawym górnym rogu kontenera aplikacji
+- otwieranie repozytorium projektu w nowej karcie przez ikonę outline SVG
+
 Czego aplikacja nie robi:
 - brak historii i cache
 - brak autodetekcji języka
@@ -86,6 +90,10 @@ Nowa funkcjonalność (PRD 004):
 - UI renderuje przyciski `copy` i `export` jako inline SVG sterowane `currentColor`
 - UI dodaje chwilowy stan wizualny sukcesu akcji kopiowania i zapisu bez zmian przepływu danych
 
+Nowa funkcjonalność (PRD 005):
+- UI renderuje przycisk `github` jako ikonę outline SVG nad kartą tłumaczeń (prawy górny róg kontenera `.app`)
+- UI otwiera link do repozytorium projektu w nowej karcie bez ingerencji w przepływ tłumaczenia
+
 ---
 
 ## Komponenty techniczne
@@ -101,6 +109,7 @@ Lista kluczowych komponentów technicznych i ich odpowiedzialności.
 - Panel UI: statyczna sekcja ze skrótami klawiaturowymi
 - System ikon UI: inline SVG dla akcji kopiowania i zapisu z kolorowaniem przez `currentColor`
 - Warstwa stanów UI: style interakcji przycisków ikon i chwilowy stan sukcesu po akcji
+- Nawigacja zewnętrzna UI: przycisk GitHub osadzony nad kartą tłumaczeń, w prawym górnym rogu kontenera `.app`
 
 ---
 
@@ -160,6 +169,14 @@ Każda decyzja powinna zawierać:
   Uzasadnienie: PRD wymaga subtelnego feedbacku bez zmiany layoutu i bez zmian w logice tłumaczenia.
   Konsekwencje: Drobna logika JS dla czasowego przełączania klasy; zachowanie dotychczasowych komunikatów statusu.
 
+- Decyzja (PRD 005): Przycisk GitHub jest umieszczony nad kartą tłumaczeń, w prawym górnym rogu kontenera `.app`.
+  Uzasadnienie: Wdrożenie doprecyzowuje docelowe położenie jako element nad kartami tłumaczeń, z zachowaniem czytelności głównego interfejsu.
+  Konsekwencje: Zmiana dotyczy wyłącznie layoutu UI i pozycjonowania CSS; brak wpływu na backend i logikę tłumaczenia.
+
+- Decyzja (PRD 005): Ikona GitHub korzysta z inline SVG i istniejących klas `.icon` oraz `.icon-svg`.
+  Uzasadnienie: PRD wymaga spójności wizualnej z wcześniej wdrożonym systemem ikon i obsługi motywów przez `currentColor`.
+  Konsekwencje: Brak nowych zależności i brak duplikacji stylowania ikon.
+
 ---
 
 ## Jakość i kryteria akceptacji
@@ -193,4 +210,4 @@ Wspólne wymagania jakościowe dla całego projektu.
 
 - Data utworzenia: 2026-02-01
 - Ostatnia aktualizacja: 2026-02-07
-- Aktualny zakres obowiązywania: MVP (v1) zgodnie z PRD 000-initial-prd.md oraz rozszerzeniami PRD 001-004
+- Aktualny zakres obowiązywania: MVP (v1) zgodnie z PRD 000-initial-prd.md oraz rozszerzeniami PRD 001-005
