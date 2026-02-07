@@ -10,11 +10,14 @@ Lokalna, prywatna aplikacja webowa do szybkiego i strumieniowego tłumaczenia te
 - Pobrany model `translategemma`
 
 ## Instalacja UV
-Install uv with our standalone installers:
+Instalacja:
 
 ```sh
-# On macOS and Linux.
+# macOS i Linux.
 curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# Lub macOS
+brew install uv
 ```
 
 ```powershell
