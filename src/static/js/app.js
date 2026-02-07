@@ -29,6 +29,11 @@ const setStatus = (message) => {
     statusLabel.textContent = message;
 };
 
+const pulseSuccess = (button) => {
+    button.classList.add("success");
+    setTimeout(() => button.classList.remove("success"), 600);
+};
+
 const setBusy = (busy) => {
     translateButton.disabled = busy;
     sourceText.disabled = busy;
@@ -72,6 +77,7 @@ copyButton.addEventListener("click", async () => {
     try {
         await navigator.clipboard.writeText(text);
         setStatus("Skopiowano");
+        pulseSuccess(copyButton);
     } catch (error) {
         setStatus("Nie udało się skopiować");
     }
@@ -93,6 +99,7 @@ exportButton.addEventListener("click", () => {
     link.remove();
     URL.revokeObjectURL(url);
     setStatus("Zapisano");
+    pulseSuccess(exportButton);
 });
 
 document.addEventListener("keydown", (event) => {

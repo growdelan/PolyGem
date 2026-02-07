@@ -170,3 +170,23 @@ Definition of Done:
 Zakres:
 - dodanie sekcji informacyjnej w layoutcie strony
 - stylowanie panelu i typografii
+
+---
+
+## Milestone 3.3: Outline SVG dla ikon akcji (done)
+
+Cel:
+- poprawa spójności wizualnej przycisków akcji kopiowania i zapisu
+- zapewnienie czytelnych stanów interakcji i subtelnego feedbacku sukcesu
+
+Definition of Done:
+- przyciski `copy` i `export` używają ikon SVG outline zamiast emoji
+- kolory ikon wynikają z CSS (`currentColor`) i są spójne z light/dark mode
+- dostępne są stany `hover`, `focus-visible` i `active` dla przycisków ikon
+- po udanym kopiowaniu i zapisie widoczny jest krótki stan sukcesu bez zmiany layoutu
+- dotychczasowe komunikaty statusu (`Skopiowano`, `Zapisano`) pozostają bez zmian
+
+Zakres:
+- podmiana zawartości przycisków ikon w HTML na inline SVG
+- dopisanie styli `.icon`, `.icon-svg` oraz stanu `.icon.success` w CSS
+- dodanie krótkiej logiki JS do czasowego oznaczenia sukcesu dla akcji copy/export

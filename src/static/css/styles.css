@@ -164,12 +164,48 @@ textarea {
     background: var(--card);
     border-radius: 10px;
     padding: 0 10px;
-    font-size: 0.95rem;
+    color: var(--muted);
     cursor: pointer;
     height: 32px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    transition:
+        background 150ms ease,
+        border-color 150ms ease,
+        color 150ms ease,
+        transform 120ms ease;
+}
+
+.icon:hover {
+    background: color-mix(in srgb, var(--primary) 6%, var(--card));
+    border-color: color-mix(in srgb, var(--primary) 25%, var(--border));
+    color: color-mix(in srgb, var(--text) 75%, var(--primary));
+}
+
+.icon:active {
+    transform: translateY(1px);
+}
+
+.icon:focus-visible {
+    outline: 2px solid color-mix(in srgb, var(--primary) 55%, transparent);
+    outline-offset: 2px;
+}
+
+.icon.success {
+    color: color-mix(in srgb, var(--primary) 80%, var(--text));
+    border-color: color-mix(in srgb, var(--primary) 45%, var(--border));
+}
+
+.icon-svg {
+    width: 18px;
+    height: 18px;
+    display: block;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
 }
 
 .panel-actions {
