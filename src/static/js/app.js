@@ -31,6 +31,11 @@ const setStatus = (message) => {
     statusLabel.textContent = message;
 };
 
+const getLanguageLabel = (code) => {
+    const option = Array.from(sourceLang.options).find((item) => item.value === code);
+    return option ? option.textContent.trim() : code;
+};
+
 const pulseSuccess = (button) => {
     button.classList.add("success");
     setTimeout(() => button.classList.remove("success"), 600);
@@ -160,8 +165,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
 translateButton.addEventListener("click", async () => {
     const text = sourceText.value.trim();
+    const isAutoSource = sourceLang.value === "auto";
+
     setBusy(true);
-    setStatus("Translating...");
+    if (isAutoSource) {
+        setStatus("Auto: wykrywanie języka...");
+    } else {
+        setStatus("Translating...");
+    }
     targetText.value = "";
     currentController = new AbortController();
     let aborted = false;
@@ -190,6 +201,15 @@ translateButton.addEventListener("click", async () => {
             setStatus("Błąd");
             targetText.value = "Brak odpowiedzi z serwera.";
             return;
+        }
+
+        if (isAutoSource) {
+            const detectedSource = response.headers.get("X-Detected-Language");
+            if (detectedSource) {
+                setStatus(`Wykryto: ${getLanguageLabel(detectedSource)} • Translating...`);
+            } else {
+                setStatus("Translating...");
+            }
         }
 
         const reader = response.body.getReader();

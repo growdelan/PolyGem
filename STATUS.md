@@ -23,6 +23,7 @@
 - Ikona GitHub nad kartą tłumaczeń (prawy górny róg kontenera aplikacji)
 - Ikona X obok GitHub w sekcji social nad kartą tłumaczeń
 - Subtelna stopka pod panelem skrótów (autor + linki GitHub oraz X)
+- Opcja `Auto` dla języka źródłowego z autodetekcją przez `langid` po stronie backendu
 - Testy `unittest` przechodzą
 
 ## Co jest skończone
@@ -39,6 +40,7 @@
 - Milestone 3.4: ikona GitHub nad kartą tłumaczeń
 - Milestone 3.5: subtelna stopka pod panelem skrótów
 - Milestone 3.6: ikona X w sekcji social i stopce
+- Milestone 3.7: autodetekcja języka źródłowego (Auto)
 
 ## Co jest w trakcie
 
@@ -54,3 +56,4 @@
 - 2026-02-07: zakończono Milestone 3.4
 - 2026-02-07: zakończono Milestone 3.5
 - 2026-02-07: zakończono Milestone 3.6
+- 2026-02-08: zakończono Milestone 3.7

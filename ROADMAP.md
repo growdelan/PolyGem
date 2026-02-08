@@ -250,3 +250,24 @@ Zakres:
 - zastąpienie pojedynczego przycisku GitHub wrapperem social z dwoma ikonami
 - dodanie stylu pozycjonowania `page-social` i odstępu między ikonami
 - dodanie obsługi kliknięcia dla przycisku X oraz linku X w stopce
+
+---
+
+## Milestone 3.7: Autodetekcja języka źródłowego (Auto) (done)
+
+Cel:
+- zmniejszyć liczbę ręcznych zmian języka źródłowego przez wprowadzenie opcji `Auto`
+- wysyłać do backendu wykryty kod języka zamiast wartości `auto`
+
+Definition of Done:
+- dropdown „Źródłowy” zawiera opcję `Auto`
+- przy wybranym `Auto` aplikacja przekazuje `source_lang=auto`, a backend wykrywa język przez `langid`
+- detekcja jest ograniczona do języków wspieranych przez aplikację i ma fallback `en`
+- UI pokazuje subtelną informację o wykrytym języku
+- rozwiązanie działa offline i nie zmienia streamingu, Cancel ani backendu
+
+Zakres:
+- dodanie opcji `Auto` do selecta języka źródłowego
+- dodanie obsługi `source_lang=auto` w backendzie z użyciem `langid`
+- ograniczenie detekcji do listy języków wspieranych i fallback `en`
+- dodanie komunikatu statusu o autodetekcji oraz zachowanie kompatybilności z LocalStorage

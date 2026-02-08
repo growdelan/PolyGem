@@ -49,6 +49,43 @@ class SmokeTest(unittest.TestCase):
             {"error": "Text too long. Please shorten the input."},
         )
 
+    def test_translate_auto_uses_detected_language(self):
+        client = app.test_client()
+        with patch("src.app.detect_source_language", return_value="de") as detect_mock:
+            with patch("src.app.translate_text", return_value="Czesc") as translate_mock:
+                response = client.post(
+                    "/translate",
+                    json={
+                        "text": "Hallo Welt",
+                        "source_lang": "auto",
+                        "target_lang": "pl",
+                    },
+                )
+        self.assertEqual(response.status_code, 200)
+        detect_mock.assert_called_once_with("Hallo Welt")
+        translate_mock.assert_called_once_with("Hallo Welt", "de", "pl")
+        self.assertEqual(
+            response.get_json(),
+            {"translation": "Czesc", "detected_source_lang": "de"},
+        )
+
+    def test_translate_stream_auto_sets_detected_header(self):
+        client = app.test_client()
+        with patch("src.app.detect_source_language", return_value="fr"):
+            with patch("src.app.translate_stream", return_value=iter(["A", "B"])):
+                response = client.post(
+                    "/translate",
+                    json={
+                        "text": "Bonjour",
+                        "source_lang": "auto",
+                        "target_lang": "pl",
+                        "stream": True,
+                    },
+                )
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.get_data(as_text=True), "AB")
+        self.assertEqual(response.headers.get("X-Detected-Language"), "fr")
+
 
 if __name__ == "__main__":
     unittest.main()
