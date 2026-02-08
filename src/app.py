@@ -1,6 +1,7 @@
 import os
 from urllib.parse import urlparse
 
+import langid
 from flask import Flask, Response, jsonify, render_template, request
 from dotenv import load_dotenv
 from ollama import Client
@@ -21,6 +22,7 @@ LANGUAGES = [
     {"code": "ko", "name": "Korean"},
     {"code": "zh", "name": "Chinese"},
 ]
+LANGUAGE_CODES = [language["code"] for language in LANGUAGES]
 
 app = Flask(__name__, template_folder="templates", static_folder="static")
 _ollama_client = None
@@ -82,6 +84,18 @@ def get_ollama_client() -> Client:
     return _ollama_client
 
 
+def detect_source_language(text: str) -> str:
+    langid.set_languages(LANGUAGE_CODES)
+    try:
+        code, _score = langid.classify(text or "")
+    except Exception:
+        return "en"
+
+    if code not in LANGUAGE_CODES:
+        return "en"
+    return code
+
+
 def translate_text(text: str, source_code: str, target_code: str) -> str:
     prompt = build_prompt(source_code, target_code, text)
     client = get_ollama_client()
@@ -121,16 +135,24 @@ def translate():
     source_code = payload.get("source_lang", "pl")
     target_code = payload.get("target_lang", "en")
     stream = bool(payload.get("stream"))
+    detected_source_code = None
+
+    if source_code == "auto":
+        detected_source_code = detect_source_language(text)
+        source_code = detected_source_code
 
     if len(text) > MAX_TEXT_LENGTH:
         return jsonify({"error": "Text too long. Please shorten the input."}), 400
 
     if stream:
         try:
-            return Response(
+            response = Response(
                 translate_stream(text, source_code, target_code),
                 mimetype="text/plain",
             )
+            if detected_source_code:
+                response.headers["X-Detected-Language"] = detected_source_code
+            return response
         except ValueError as exc:
             return jsonify({"error": str(exc)}), 400
         except Exception:
@@ -143,7 +165,10 @@ def translate():
     except Exception:
         return jsonify({"error": "Translation failed."}), 500
 
-    return jsonify({"translation": translation})
+    response = {"translation": translation}
+    if detected_source_code:
+        response["detected_source_lang"] = detected_source_code
+    return jsonify(response)
 
 
 if __name__ == "__main__":

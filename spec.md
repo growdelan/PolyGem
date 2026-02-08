@@ -55,9 +55,13 @@ Nowa funkcjonalność (PRD 007):
 - dodanie ikony X obok GitHub w sekcji social nad kartą tłumaczeń
 - dodanie linku X w stopce obok linku GitHub
 
+Nowa funkcjonalność (PRD 008):
+- dodanie opcji `Auto` w wyborze języka źródłowego
+- autodetekcja języka wejściowego oparta o bibliotekę `langid` po stronie backendu
+
 Czego aplikacja nie robi:
 - brak historii i cache
-- brak autodetekcji języka
+- brak autodetekcji modelowej przez LLM; dostępna jest autodetekcja offline oparta o `langid`
 - brak wyboru/parametryzacji modelu
 - brak chunkowania długich dokumentów
 - brak autoryzacji i pracy wieloużytkownikowej
@@ -110,6 +114,10 @@ Nowa funkcjonalność (PRD 007):
 - UI renderuje wrapper `page-social` z ikonami `github` i `x` nad sekcją tłumaczeń
 - UI otwiera link `https://x.com/growdelan` z ikony X i udostępnia link X w stopce
 
+Nowa funkcjonalność (PRD 008):
+- UI udostępnia opcję `Auto` i przekazuje `source_lang=auto` do backendu
+- backend wykrywa język przez `langid` (z ograniczeniem do wspieranych języków) i używa go w tłumaczeniu
+
 ---
 
 ## Komponenty techniczne
@@ -128,6 +136,7 @@ Lista kluczowych komponentów technicznych i ich odpowiedzialności.
 - Nawigacja zewnętrzna UI: przycisk GitHub osadzony nad kartą tłumaczeń, w prawym górnym rogu kontenera `.app`
 - Stopka UI: osobna sekcja pod panelem skrótów z informacją o autorze i linkiem GitHub
 - Sekcja social UI: grupa ikon GitHub/X nad kartą tłumaczeń oraz linki GitHub/X w stopce
+- Detekcja języka backend: klasyfikacja przez `langid` dla opcji `Auto` z fallbackiem do `en`
 
 ---
 
@@ -211,6 +220,18 @@ Każda decyzja powinna zawierać:
   Uzasadnienie: PRD wymaga spójnej obecności kanału X w obu miejscach nawigacji zewnętrznej.
   Konsekwencje: Brak nowych zależności; rozszerzenie istniejącej nawigacji zewnętrznej o dodatkowy link.
 
+- Decyzja (PRD 008): Autodetekcja języka źródłowego jest realizowana po stronie backendu z użyciem `langid`, w trybie offline.
+  Uzasadnienie: PRD 008 po korekcie wymaga prostego i skuteczniejszego mechanizmu detekcji niż heurystyki klienta.
+  Konsekwencje: Backend obsługuje `source_lang=auto`; brak połączeń zewnętrznych.
+
+- Decyzja (PRD 008): Detekcja `langid` jest ograniczona do języków wspieranych przez aplikację (`langid.set_languages([...])`) i ma fallback `en`.
+  Uzasadnienie: Ograniczenie listy języków zmniejsza ryzyko kodów spoza zakresu UI i utrzymuje przewidywalność działania.
+  Konsekwencje: Detekcja pozostaje zależna od jakości klasyfikacji krótkich tekstów; błędy nie blokują tłumaczenia.
+
+- Decyzja (PRD 008): Dodanie `langid` jako zależności projektu jest dopuszczone dla funkcji autodetekcji.
+  Uzasadnienie: Funkcja `Auto` wymaga biblioteki Python do klasyfikacji języka bez usług zewnętrznych.
+  Konsekwencje: Należy utrzymywać zależność `langid` i jej zgodność ze środowiskiem projektu.
+
 ---
 
 ## Jakość i kryteria akceptacji
@@ -243,5 +264,5 @@ Wspólne wymagania jakościowe dla całego projektu.
 - Aktualny zakres obowiązywania:
 
 - Data utworzenia: 2026-02-01
-- Ostatnia aktualizacja: 2026-02-07
-- Aktualny zakres obowiązywania: MVP (v1) zgodnie z PRD 000-initial-prd.md oraz rozszerzeniami PRD 001-007
+- Ostatnia aktualizacja: 2026-02-08
+- Aktualny zakres obowiązywania: MVP (v1) zgodnie z PRD 000-initial-prd.md oraz rozszerzeniami PRD 001-008
