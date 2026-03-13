@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Local AI Translator</title>
+    <title>PolyGem</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" />
 </head>
 <body>
@@ -11,12 +11,12 @@
         <header class="app-header">
             <div class="app-header-copy">
                 <span class="app-badge">Offline • Private • Ollama</span>
-                <h1>Local AI Translator</h1>
+                <h1>PolyGem</h1>
                 <p>
                     Szybkie, prywatne tłumaczenie tekstu lokalnie na Twoim komputerze.
                 </p>
             </div>
-            <div class="app-header-actions">
+            <div class="app-header-actions" aria-label="Akcje aplikacji">
                 <button id="theme-toggle" type="button" class="theme-toggle">Tryb ciemny</button>
                 <div class="page-social">
                     <button id="github" type="button" class="icon social-link" aria-label="Odwiedź GitHub" title="GitHub">
@@ -102,17 +102,39 @@
             </div>
             <div class="status-wrap">
                 <span class="spinner" id="spinner" aria-hidden="true"></span>
-                <span id="status" class="status">Gotowe do tłumaczenia</span>
+                <span id="status" class="status status--idle" aria-live="polite">Gotowe do tłumaczenia</span>
             </div>
         </section>
     </main>
 
-    <section class="shortcuts-panel">
+    <section class="shortcuts-panel" aria-label="Skróty klawiaturowe">
         <h2>Skróty klawiaturowe</h2>
-        <ul>
-            <li><span class="shortcut">⌘⏎ / Ctrl+Enter</span> — rozpocznij tłumaczenie</li>
-            <li><span class="shortcut">⌘K / Ctrl+K</span> — zamień języki</li>
-            <li><span class="shortcut">⌘⇧C / Ctrl+Shift+C</span> — kopiuj tłumaczenie</li>
+        <ul class="shortcuts-list">
+            <li class="shortcuts-item">
+                <div class="shortcuts-keys">
+                    <span class="kbd">⌘</span>
+                    <span class="kbd">↵</span>
+                    <span class="kbd">Ctrl + Enter</span>
+                </div>
+                <span class="shortcuts-desc">Rozpocznij tłumaczenie</span>
+            </li>
+            <li class="shortcuts-item">
+                <div class="shortcuts-keys">
+                    <span class="kbd">⌘</span>
+                    <span class="kbd">K</span>
+                    <span class="kbd">Ctrl + K</span>
+                </div>
+                <span class="shortcuts-desc">Zamień języki</span>
+            </li>
+            <li class="shortcuts-item">
+                <div class="shortcuts-keys">
+                    <span class="kbd">⌘</span>
+                    <span class="kbd">⇧</span>
+                    <span class="kbd">C</span>
+                    <span class="kbd">Ctrl + Shift + C</span>
+                </div>
+                <span class="shortcuts-desc">Kopiuj tłumaczenie</span>
+            </li>
         </ul>
     </section>
 

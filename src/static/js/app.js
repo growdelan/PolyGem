@@ -12,9 +12,11 @@ const translateButton = document.getElementById("translate");
 const cancelButton = document.getElementById("cancel");
 const spinner = document.getElementById("spinner");
 const statusLabel = document.getElementById("status");
+const STATUS_CLASSES = ["status--idle", "status--busy", "status--success", "status--error"];
 
 let currentController = null;
 let currentTheme = "light";
+let statusResetTimer = null;
 
 const applyTheme = (theme) => {
     document.body.classList.toggle("theme-dark", theme === "dark");
@@ -27,8 +29,17 @@ const saveLanguages = () => {
     localStorage.setItem("target_lang", targetLang.value);
 };
 
-const setStatus = (message) => {
+const setStatus = (message, type = "idle") => {
     statusLabel.textContent = message;
+    statusLabel.classList.remove(...STATUS_CLASSES);
+    statusLabel.classList.add(`status--${type}`);
+};
+
+const scheduleStatusReset = (message = "Gotowe do tłumaczenia", type = "idle", delay = 1600) => {
+    window.clearTimeout(statusResetTimer);
+    statusResetTimer = window.setTimeout(() => {
+        setStatus(message, type);
+    }, delay);
 };
 
 const getLanguageLabel = (code) => {
@@ -86,10 +97,12 @@ copyButton.addEventListener("click", async () => {
 
     try {
         await navigator.clipboard.writeText(text);
-        setStatus("Skopiowano");
+        setStatus("Skopiowano", "success");
         pulseSuccess(copyButton);
+        scheduleStatusReset();
     } catch (error) {
-        setStatus("Nie udało się skopiować");
+        setStatus("Nie udało się skopiować", "error");
+        scheduleStatusReset("Gotowe do tłumaczenia", "idle", 2200);
     }
 });
 
@@ -108,8 +121,9 @@ exportButton.addEventListener("click", () => {
     link.click();
     link.remove();
     URL.revokeObjectURL(url);
-    setStatus("Zapisano");
+    setStatus("Zapisano do pliku", "success");
     pulseSuccess(exportButton);
+    scheduleStatusReset();
 });
 
 if (githubButton) {
@@ -164,17 +178,26 @@ document.addEventListener("DOMContentLoaded", () => {
     if (storedTarget) {
         targetLang.value = storedTarget;
     }
+
+    setStatus("Gotowe do tłumaczenia", "idle");
 });
 
 translateButton.addEventListener("click", async () => {
     const text = sourceText.value.trim();
     const isAutoSource = sourceLang.value === "auto";
+    window.clearTimeout(statusResetTimer);
+
+    if (!text) {
+        setStatus("Wpisz tekst do tłumaczenia", "error");
+        sourceText.focus();
+        return;
+    }
 
     setBusy(true);
     if (isAutoSource) {
-        setStatus("Auto: wykrywanie języka...");
+        setStatus("Auto: wykrywanie języka...", "busy");
     } else {
-        setStatus("Tłumaczenie...");
+        setStatus("Tłumaczenie...", "busy");
     }
     targetText.value = "";
     currentController = new AbortController();
@@ -196,12 +219,12 @@ translateButton.addEventListener("click", async () => {
         if (!response.ok) {
             const data = await response.json();
             targetText.value = data.error || "Błąd tłumaczenia.";
-            setStatus("Wystąpił błąd");
+            setStatus("Wystąpił błąd", "error");
             return;
         }
 
         if (!response.body) {
-            setStatus("Wystąpił błąd");
+            setStatus("Wystąpił błąd", "error");
             targetText.value = "Brak odpowiedzi z serwera.";
             return;
         }
@@ -209,9 +232,9 @@ translateButton.addEventListener("click", async () => {
         if (isAutoSource) {
             const detectedSource = response.headers.get("X-Detected-Language");
             if (detectedSource) {
-                setStatus(`Wykryto: ${getLanguageLabel(detectedSource)} • Tłumaczenie...`);
+                setStatus(`Wykryto: ${getLanguageLabel(detectedSource)} • Tłumaczenie...`, "busy");
             } else {
-                setStatus("Tłumaczenie...");
+                setStatus("Tłumaczenie...", "busy");
             }
         }
 
@@ -226,15 +249,15 @@ translateButton.addEventListener("click", async () => {
         }
 
         if (!aborted) {
-            setStatus("Gotowe");
+            setStatus("Gotowe", "success");
         }
     } catch (error) {
         if (error.name === "AbortError") {
             aborted = true;
-            setStatus("Przerwano");
+            setStatus("Przerwano", "idle");
         } else {
             targetText.value = "Błąd połączenia z serwerem.";
-            setStatus("Wystąpił błąd");
+            setStatus("Wystąpił błąd", "error");
         }
     } finally {
         currentController = null;

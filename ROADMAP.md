@@ -299,7 +299,7 @@ Zakres:
 
 Cel:
 - wdrożyć nowoczesny, spokojny i premium wygląd aplikacji przy zachowaniu obecnej funkcjonalności
-- ujednolicić cały język interfejsu na polski z zachowaniem nazwy produktu `Local AI Translator`
+- ujednolicić cały język interfejsu na polski z zachowaniem nazwy produktu `PolyGem`
 
 Definition of Done:
 - aplikacja ma wyraźny header produktu z badge, opisem wartości, przełącznikiem motywu i linkami social
@@ -314,3 +314,24 @@ Zakres:
 - wdrożenie nowego systemu wizualnego w CSS: tło, tokeny kolorów, surface cards, spacing, promienie, CTA, ikony i status chip
 - pełna polonizacja etykiet i komunikatów UI w HTML/JS
 - rozszerzenie logiki JS o spójne statusy `Auto` i blokadę dodatkowych kontrolek podczas tłumaczenia
+
+---
+
+## Milestone 4.2: Statusy UX i polish panelu skrótów (done)
+
+Cel:
+- dopracować mikro-UX statusów i akcji pomocniczych bez zmiany głównego flow tłumaczenia
+- podnieść jakość panelu skrótów i drobnych warstw wizualnych po premium redesignie
+
+Definition of Done:
+- status ma warianty `idle`, `busy`, `success` i `error` oraz jest sterowany przez JS
+- po `copy` i `export` status wraca automatycznie do stanu domyślnego po krótkim czasie
+- kliknięcie `Tłumacz` przy pustym wejściu nie wysyła żądania i pokazuje komunikat błędu
+- element statusu ma `aria-live="polite"` i domyślną klasę `status--idle`
+- panel skrótów używa markupu keycaps bez zmiany mapowania skrótów
+- lżejszy `theme-toggle`, mocniejszy surface `.panel` i bardziej odróżniony `.output-text` działają poprawnie w light/dark mode i na mobile
+
+Zakres:
+- rozszerzenie `app.js` o typowane statusy, reset po akcjach pomocniczych i walidację pustego wejścia
+- dopisanie wariantów `.status--*` oraz polishu `theme-toggle`, `.panel`, `.output-text` i `status-wrap` w CSS
+- przebudowa HTML statusu i panelu skrótów na bardziej semantyczny markup

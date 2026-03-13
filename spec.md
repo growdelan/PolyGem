@@ -6,7 +6,7 @@ Krótki opis celu aplikacji:
 - dla kogo
 - w jakim zakresie (co jest poza zakresem)
 
-Local AI Translator zapewnia w pełni lokalne, prywatne tłumaczenie tekstu bez wysyłania danych do usług zewnętrznych. Aplikacja jest przeznaczona dla pojedynczego użytkownika na macOS i działa wyłącznie na localhost. Zakres obejmuje tłumaczenie tekstu z użyciem lokalnego modelu Ollama ze streamingiem, prosty interfejs oraz wygodne operacje (zamiana języków, kopiowanie, export). Poza zakresem są m.in. historia tłumaczeń, autodetekcja języka, wybór modelu, regulacja parametrów oraz praca wieloużytkownikowa.
+PolyGem zapewnia w pełni lokalne, prywatne tłumaczenie tekstu bez wysyłania danych do usług zewnętrznych. Aplikacja jest przeznaczona dla pojedynczego użytkownika na macOS i działa wyłącznie na localhost. Zakres obejmuje tłumaczenie tekstu z użyciem lokalnego modelu Ollama ze streamingiem, prosty interfejs oraz wygodne operacje (zamiana języków, kopiowanie, export). Poza zakresem są m.in. historia tłumaczeń, autodetekcja języka, wybór modelu, regulacja parametrów oraz praca wieloużytkownikowa.
 
 ---
 
@@ -61,8 +61,13 @@ Nowa funkcjonalność (PRD 008):
 
 Nowa funkcjonalność (PRD 009):
 - redesign interfejsu w kierunku bardziej premium z wyraźnym headerem produktu i mocniejszą hierarchią wizualną
-- pełna polonizacja tekstów UI przy zachowaniu nazwy produktu `Local AI Translator`
+- pełna polonizacja tekstów UI przy zachowaniu nazwy produktu `PolyGem`
 - przebudowa layoutu sekcji sterowania, wejścia, wyniku, statusu oraz integracji elementów social z głównym układem
+
+Nowa funkcjonalność (PRD 010):
+- warianty wizualne statusu dla stanów `idle`, `busy`, `success` i `error`
+- walidacja pustego wejścia po stronie UI przed uruchomieniem tłumaczenia
+- przebudowa panelu skrótów na bardziej dopracowany markup z keycaps
 
 Czego aplikacja nie robi:
 - brak historii i cache
@@ -129,6 +134,11 @@ Nowa funkcjonalność (PRD 009):
 - frontend zachowuje istniejący kontrakt z backendem `/translate`, rozszerzając jedynie prezentację statusów i blokadę kontrolek podczas tłumaczenia
 - panel skrótów i stopka pozostają poza `main.app`, ale są renderowane jako wizualnie spójne sekcje/karty poniżej głównego kontenera
 
+Nowa funkcjonalność (PRD 010):
+- frontend rozszerza status o typy wizualne i automatyczny reset po akcjach pomocniczych
+- UI zatrzymuje próbę tłumaczenia przy pustym polu wejściowym przed wysłaniem żądania do backendu
+- panel skrótów otrzymuje semantyczny markup z keycaps bez zmiany mapowania klawiszy
+
 ---
 
 ## Komponenty techniczne
@@ -150,7 +160,10 @@ Lista kluczowych komponentów technicznych i ich odpowiedzialności.
 - Detekcja języka backend: klasyfikacja przez `langid` dla opcji `Auto` z fallbackiem do `en`
 - Header produktu UI: sekcja z badge, tytułem, opisem wartości, przełącznikiem motywu i linkami social
 - System surface UI: miękkie tokeny kolorów, premium card layout, status chip oraz rozróżnienie panelu wejścia i wyniku
-- Warstwa polonizacji UI: spójne polskie etykiety i komunikaty statusu z zachowaniem angielskiej nazwy produktu
+- Warstwa polonizacji UI: spójne polskie etykiety i komunikaty statusu z zachowaniem nazwy produktu `PolyGem`
+- System statusów UI: warianty `idle/busy/success/error` sterowane klasami CSS i logiką JS
+- Walidacja wejścia UI: blokada pustego tłumaczenia po stronie klienta z komunikatem błędu i fokusem
+- Panel skrótów UI: markup oparty o keycaps (`kbd`-like chips) dla skrótów klawiaturowych
 
 ---
 
@@ -250,7 +263,7 @@ Każda decyzja powinna zawierać:
   Uzasadnienie: PRD 009 opisuje zmianę jakości wizualnej, hierarchii layoutu i UX, bez rozszerzania funkcjonalności backendu.
   Konsekwencje: Implementacja powinna ograniczyć się do struktury szablonu, stylów i komunikatów/stanu w JS; testy backendowe nie wymagają zmian zakresowych.
 
-- Decyzja (dotyczy PRD: 009-premium-ui-refresh-prd.md): UI przechodzi na spójne polskie etykiety i komunikaty operacyjne, z wyjątkiem nazwy produktu `Local AI Translator`.
+- Decyzja (dotyczy PRD: 009-premium-ui-refresh-prd.md): UI przechodzi na spójne polskie etykiety i komunikaty operacyjne, z wyjątkiem nazwy produktu `PolyGem`.
   Uzasadnienie: PRD 009 wskazuje niespójność językową jako jeden z głównych problemów obecnego interfejsu.
   Konsekwencje: Należy zaktualizować napisy w HTML i JS oraz zachować spójność future changes z językiem polskim.
 
@@ -269,6 +282,22 @@ Każda decyzja powinna zawierać:
 - Decyzja (dotyczy PRD: 009-premium-ui-refresh-prd.md): Docelowa hierarchia layoutu dla milestone’u 4.1 to: `header produktu` -> `control bar języków` -> `sekcja dwóch paneli` -> `action/status bar` wewnątrz `main.app`, a następnie `shortcuts-panel` i `footer` jako osobne sekcje poniżej.
   Uzasadnienie: Taki układ rozdziela sterowanie, wejście, wynik i status bez zmiany kontraktu backendu oraz pozwala zachować logiczny rytm strony.
   Konsekwencje: Milestone 4.1 może wdrażać redesign bez dalszych decyzji strukturalnych HTML.
+
+- Decyzja (dotyczy PRD: 010-status-feedback-and-shortcuts-polish-prd.md): Status UI jest sterowany przez tekst oraz jawny typ (`idle`, `busy`, `success`, `error`) mapowany na klasy CSS.
+  Uzasadnienie: PRD 010 wymaga czytelnego rozróżnienia stanów pracy, sukcesu i błędu bez zmiany backendu.
+  Konsekwencje: JS musi zarządzać klasami statusu, a CSS utrzymywać spójne warianty wizualne.
+
+- Decyzja (dotyczy PRD: 010-status-feedback-and-shortcuts-polish-prd.md): Akcje pomocnicze `copy` i `export` używają krótkiego resetu statusu do stanu domyślnego po komunikacie sukcesu lub błędu.
+  Uzasadnienie: PRD 010 wymaga, aby komunikaty po akcjach pomocniczych nie pozostawały zbyt długo w UI.
+  Konsekwencje: Logika JS musi unikać trwałego nadpisywania statusu i pilnować bezpiecznego przywrócenia stanu `idle`.
+
+- Decyzja (dotyczy PRD: 010-status-feedback-and-shortcuts-polish-prd.md): Walidacja pustego tekstu wejściowego jest realizowana wyłącznie po stronie frontendowej przed wywołaniem `fetch`.
+  Uzasadnienie: To jest najniższe ryzyko i najszybszy feedback UX zgodny z zakresem PRD 010.
+  Konsekwencje: Backend pozostaje bez zmian; UI pokazuje błąd i ustawia fokus na polu wejściowym.
+
+- Decyzja (dotyczy PRD: 010-status-feedback-and-shortcuts-polish-prd.md): Panel skrótów zachowuje dotychczasowe mapowanie klawiszy, ale zmienia markup na keycaps z lepszą semantyką i prezentacją wizualną.
+  Uzasadnienie: PRD 010 wymaga dopracowania panelu skrótów bez zmiany zachowania skrótów.
+  Konsekwencje: Zmiana dotyczy wyłącznie HTML/CSS; treść skrótów i logika klawiszy pozostają bez zmian.
 
 ---
 
@@ -302,5 +331,5 @@ Wspólne wymagania jakościowe dla całego projektu.
 - Aktualny zakres obowiązywania:
 
 - Data utworzenia: 2026-02-01
-- Ostatnia aktualizacja: 2026-02-08
-- Aktualny zakres obowiązywania: MVP (v1) zgodnie z PRD 000-initial-prd.md oraz rozszerzeniami PRD 001-008
+- Ostatnia aktualizacja: 2026-03-13
+- Aktualny zakres obowiązywania: MVP (v1) zgodnie z PRD 000-initial-prd.md oraz rozszerzeniami PRD 001-010
