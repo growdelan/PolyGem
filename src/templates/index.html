@@ -3,26 +3,39 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Local AI Translator</title>
+    <title>PolyGem</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" />
 </head>
 <body>
     <main class="app">
-        <div class="page-social">
-            <button id="github" type="button" class="icon" aria-label="Odwiedź GitHub" title="GitHub">
-                <svg class="icon-svg" viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.16 6.84 9.49.5.09.68-.22.68-.48 0-.24-.01-.87-.01-1.71-2.78.6-3.37-1.34-3.37-1.34-.45-1.15-1.11-1.46-1.11-1.46-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.64-1.33-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.99 1.03-2.69-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02A9.56 9.56 0 0 1 12 6.8c.85.004 1.71.115 2.51.335 1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.6 1.03 2.69 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85 0 1.33-.01 2.4-.01 2.73 0 .27.18.58.69.48A10.01 10.01 0 0 0 22 12c0-5.52-4.48-10-10-10z" />
-                </svg>
-            </button>
-            <button id="x" type="button" class="icon" aria-label="Odwiedź X" title="X (Twitter)">
-                <svg class="icon-svg" viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M5 4h4.5l4.2 6.1L19 4h3l-7 8.5L22 20h-4.5l-4.7-6.7L7 20H4l7.7-8.9L5 4z" />
-                </svg>
-            </button>
-        </div>
-        <header class="toolbar">
+        <header class="app-header">
+            <div class="app-header-copy">
+                <span class="app-badge">Offline • Private • Ollama</span>
+                <h1>PolyGem</h1>
+                <p>
+                    Szybkie, prywatne tłumaczenie tekstu lokalnie na Twoim komputerze.
+                </p>
+            </div>
+            <div class="app-header-actions" aria-label="Akcje aplikacji">
+                <button id="theme-toggle" type="button" class="theme-toggle">Tryb ciemny</button>
+                <div class="page-social">
+                    <button id="github" type="button" class="icon social-link" aria-label="Odwiedź GitHub" title="GitHub">
+                        <svg class="icon-svg" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.16 6.84 9.49.5.09.68-.22.68-.48 0-.24-.01-.87-.01-1.71-2.78.6-3.37-1.34-3.37-1.34-.45-1.15-1.11-1.46-1.11-1.46-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.64-1.33-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.99 1.03-2.69-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02A9.56 9.56 0 0 1 12 6.8c.85.004 1.71.115 2.51.335 1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.6 1.03 2.69 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85 0 1.33-.01 2.4-.01 2.73 0 .27.18.58.69.48A10.01 10.01 0 0 0 22 12c0-5.52-4.48-10-10-10z" />
+                        </svg>
+                    </button>
+                    <button id="x" type="button" class="icon social-link" aria-label="Odwiedź X" title="X (Twitter)">
+                        <svg class="icon-svg" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M5 4h4.5l4.2 6.1L19 4h3l-7 8.5L22 20h-4.5l-4.7-6.7L7 20H4l7.7-8.9L5 4z" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <section class="toolbar" aria-label="Pasek sterowania tłumaczeniem">
             <div class="field">
-                <label for="source-lang">Źródłowy</label>
+                <label for="source-lang">Język wejściowy</label>
                 <select id="source-lang" name="source-lang">
                     <option value="auto">Auto</option>
                     {% for language in languages %}
@@ -32,9 +45,9 @@
                     {% endfor %}
                 </select>
             </div>
-            <button id="swap" type="button" class="swap" aria-label="Zamień języki">⇄</button>
+            <button id="swap" type="button" class="swap" aria-label="Zamień języki" title="Zamień języki">⇄</button>
             <div class="field">
-                <label for="target-lang">Docelowy</label>
+                <label for="target-lang">Język wyjściowy</label>
                 <select id="target-lang" name="target-lang">
                     {% for language in languages %}
                     <option value="{{ language.code }}" {% if language.code == default_target %}selected{% endif %}>
@@ -43,18 +56,24 @@
                     {% endfor %}
                 </select>
             </div>
-        </header>
+        </section>
 
         <section class="panels">
             <div class="panel">
-                <div class="panel-header">
-                    <label for="source-text">Tekst wejściowy</label>
+                <div class="panel-header panel-header--stack">
+                    <div>
+                        <label for="source-text">Tekst wejściowy</label>
+                        <p class="panel-subtitle">Wklej lub wpisz tekst do tłumaczenia.</p>
+                    </div>
                 </div>
                 <textarea id="source-text" rows="12" placeholder="Wpisz tekst do tłumaczenia..."></textarea>
             </div>
             <div class="panel">
-                <div class="panel-header">
-                    <label for="target-text">Tłumaczenie</label>
+                <div class="panel-header panel-header--stack">
+                    <div>
+                        <label for="target-text">Tłumaczenie</label>
+                        <p class="panel-subtitle">Wynik pojawia się na bieżąco podczas streamingu.</p>
+                    </div>
                     <div class="panel-actions">
                         <button id="copy" type="button" class="icon" aria-label="Kopiuj tłumaczenie" title="Kopiuj">
                             <svg class="icon-svg" viewBox="0 0 24 24" aria-hidden="true">
@@ -72,25 +91,50 @@
                         </button>
                     </div>
                 </div>
-                <textarea id="target-text" rows="12" readonly></textarea>
+                <textarea id="target-text" class="output-text" rows="12" readonly placeholder="Tutaj pojawi się tłumaczenie..."></textarea>
             </div>
         </section>
 
         <section class="actions">
-            <button id="translate" type="button">Translate</button>
-            <button id="cancel" type="button" class="secondary" disabled>Cancel</button>
-            <span class="spinner" id="spinner" aria-hidden="true"></span>
-            <span id="status" class="status"></span>
-            <button id="theme-toggle" type="button" class="theme-toggle">Tryb ciemny</button>
+            <div class="action-buttons">
+                <button id="translate" type="button">Tłumacz</button>
+                <button id="cancel" type="button" class="secondary" disabled>Przerwij</button>
+            </div>
+            <div class="status-wrap">
+                <span class="spinner" id="spinner" aria-hidden="true"></span>
+                <span id="status" class="status status--idle" aria-live="polite">Gotowe do tłumaczenia</span>
+            </div>
         </section>
     </main>
 
-    <section class="shortcuts-panel">
+    <section class="shortcuts-panel" aria-label="Skróty klawiaturowe">
         <h2>Skróty klawiaturowe</h2>
-        <ul>
-            <li><span class="shortcut">⌘⏎ / Ctrl+Enter</span> — rozpocznij tłumaczenie</li>
-            <li><span class="shortcut">⌘K / Ctrl+K</span> — zamień języki</li>
-            <li><span class="shortcut">⌘⇧C / Ctrl+Shift+C</span> — kopiuj tłumaczenie</li>
+        <ul class="shortcuts-list">
+            <li class="shortcuts-item">
+                <div class="shortcuts-keys">
+                    <span class="kbd">⌘</span>
+                    <span class="kbd">↵</span>
+                    <span class="kbd">Ctrl + Enter</span>
+                </div>
+                <span class="shortcuts-desc">Rozpocznij tłumaczenie</span>
+            </li>
+            <li class="shortcuts-item">
+                <div class="shortcuts-keys">
+                    <span class="kbd">⌘</span>
+                    <span class="kbd">K</span>
+                    <span class="kbd">Ctrl + K</span>
+                </div>
+                <span class="shortcuts-desc">Zamień języki</span>
+            </li>
+            <li class="shortcuts-item">
+                <div class="shortcuts-keys">
+                    <span class="kbd">⌘</span>
+                    <span class="kbd">⇧</span>
+                    <span class="kbd">C</span>
+                    <span class="kbd">Ctrl + Shift + C</span>
+                </div>
+                <span class="shortcuts-desc">Kopiuj tłumaczenie</span>
+            </li>
         </ul>
     </section>
 

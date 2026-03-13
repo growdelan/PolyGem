@@ -1,6 +1,7 @@
 # Aktualny stan projektu
 
 ## Co działa
+- Produkt jest prezentowany w UI pod nazwą `PolyGem`
 - Serwer Flask na localhost z UI tłumaczeń
 - Endpoint `/translate` z integracją Ollama
 - Obsługa błędu dla zbyt długiego tekstu
@@ -24,6 +25,15 @@
 - Ikona X obok GitHub w sekcji social nad kartą tłumaczeń
 - Subtelna stopka pod panelem skrótów (autor + linki GitHub oraz X)
 - Opcja `Auto` dla języka źródłowego z autodetekcją przez `langid` po stronie backendu
+- Dokumentacja premium redesignu UI (PRD 009) jest dodana do repo
+- Docelowy layout dla premium redesignu jest doprecyzowany w spec i roadmapie
+- Premium header produktu z badge, przełącznikiem motywu i linkami social w normalnym layoucie
+- Control bar języków oraz premium karty wejścia i wyniku
+- Pełna polonizacja głównych akcji i statusów UI
+- Status tłumaczenia jako chip oraz blokada selectów i przycisku swap podczas tłumaczenia
+- Typowane statusy `idle/busy/success/error` oraz reset statusu po akcjach pomocniczych
+- Walidacja pustego inputu po stronie UI przed wysłaniem tłumaczenia
+- Panel skrótów z markupem keycaps i `aria-live` dla statusu
 - Testy `unittest` przechodzą
 
 ## Co jest skończone
@@ -41,6 +51,9 @@
 - Milestone 3.5: subtelna stopka pod panelem skrótów
 - Milestone 3.6: ikona X w sekcji social i stopce
 - Milestone 3.7: autodetekcja języka źródłowego (Auto)
+- Milestone 4.0: redukcja ryzyka premium redesignu UI
+- Milestone 4.1: Premium UI Refresh i pełna polonizacja interfejsu
+- Milestone 4.2: Statusy UX i polish panelu skrótów
 
 ## Co jest w trakcie
 
@@ -48,6 +61,7 @@
 - TODO (kolejny milestone do zdefiniowania w ROADMAP.md)
 
 ## Blokery i ryzyka
+- Brak aktywnych blokerów
 - Brak
 
 ## Ostatnie aktualizacje
@@ -57,3 +71,8 @@
 - 2026-02-07: zakończono Milestone 3.5
 - 2026-02-07: zakończono Milestone 3.6
 - 2026-02-08: zakończono Milestone 3.7
+- 2026-03-13: dodano PRD 009 premium redesignu UI
+- 2026-03-13: zakończono Milestone 4.0
+- 2026-03-13: zakończono Milestone 4.1
+- 2026-03-13: dodano PRD 010 statusów UX i polishu panelu skrótów
+- 2026-03-13: zakończono Milestone 4.2
