@@ -464,6 +464,7 @@ button.secondary:disabled {
     font-size: 1rem;
     font-weight: 600;
     letter-spacing: -0.01em;
+    text-align: center;
 }
 
 .shortcuts-list {
@@ -472,20 +473,22 @@ button.secondary:disabled {
     list-style: none;
     display: grid;
     gap: 10px;
+    justify-content: center;
 }
 
 .shortcuts-item {
-    display: flex;
+    display: grid;
+    grid-template-columns: 320px 1fr;
     align-items: center;
     gap: 14px;
-    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .shortcuts-keys {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    min-width: 210px;
+    min-width: 0;
     flex-wrap: wrap;
 }
 
@@ -506,6 +509,7 @@ button.secondary:disabled {
 
 .shortcuts-desc {
     color: var(--muted);
+    white-space: nowrap;
 }
 
 .footer {
@@ -612,12 +616,17 @@ button.secondary:disabled {
     }
 
     .shortcuts-item {
-        flex-direction: column;
+        grid-template-columns: 1fr;
         align-items: flex-start;
+        justify-content: stretch;
     }
 
     .shortcuts-keys {
         min-width: 0;
+    }
+
+    .shortcuts-desc {
+        white-space: normal;
     }
 
     .footer-inner {
