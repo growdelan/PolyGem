@@ -59,6 +59,11 @@ Nowa funkcjonalność (PRD 008):
 - dodanie opcji `Auto` w wyborze języka źródłowego
 - autodetekcja języka wejściowego oparta o bibliotekę `langid` po stronie backendu
 
+Nowa funkcjonalność (PRD 009):
+- redesign interfejsu w kierunku bardziej premium z wyraźnym headerem produktu i mocniejszą hierarchią wizualną
+- pełna polonizacja tekstów UI przy zachowaniu nazwy produktu `Local AI Translator`
+- przebudowa layoutu sekcji sterowania, wejścia, wyniku, statusu oraz integracji elementów social z głównym układem
+
 Czego aplikacja nie robi:
 - brak historii i cache
 - brak autodetekcji modelowej przez LLM; dostępna jest autodetekcja offline oparta o `langid`
@@ -118,6 +123,12 @@ Nowa funkcjonalność (PRD 008):
 - UI udostępnia opcję `Auto` i przekazuje `source_lang=auto` do backendu
 - backend wykrywa język przez `langid` (z ograniczeniem do wspieranych języków) i używa go w tłumaczeniu
 
+Nowa funkcjonalność (PRD 009):
+- UI dodaje header produktu z badge, opisem wartości, przełącznikiem motywu i akcjami social
+- UI traktuje wybór języków jako osobny pasek sterowania i rozdziela wizualnie sekcje input/output/status
+- frontend zachowuje istniejący kontrakt z backendem `/translate`, rozszerzając jedynie prezentację statusów i blokadę kontrolek podczas tłumaczenia
+- panel skrótów i stopka pozostają poza `main.app`, ale są renderowane jako wizualnie spójne sekcje/karty poniżej głównego kontenera
+
 ---
 
 ## Komponenty techniczne
@@ -137,6 +148,9 @@ Lista kluczowych komponentów technicznych i ich odpowiedzialności.
 - Stopka UI: osobna sekcja pod panelem skrótów z informacją o autorze i linkiem GitHub
 - Sekcja social UI: grupa ikon GitHub/X nad kartą tłumaczeń oraz linki GitHub/X w stopce
 - Detekcja języka backend: klasyfikacja przez `langid` dla opcji `Auto` z fallbackiem do `en`
+- Header produktu UI: sekcja z badge, tytułem, opisem wartości, przełącznikiem motywu i linkami social
+- System surface UI: miękkie tokeny kolorów, premium card layout, status chip oraz rozróżnienie panelu wejścia i wyniku
+- Warstwa polonizacji UI: spójne polskie etykiety i komunikaty statusu z zachowaniem angielskiej nazwy produktu
 
 ---
 
@@ -231,6 +245,30 @@ Każda decyzja powinna zawierać:
 - Decyzja (PRD 008): Dodanie `langid` jako zależności projektu jest dopuszczone dla funkcji autodetekcji.
   Uzasadnienie: Funkcja `Auto` wymaga biblioteki Python do klasyfikacji języka bez usług zewnętrznych.
   Konsekwencje: Należy utrzymywać zależność `langid` i jej zgodność ze środowiskiem projektu.
+
+- Decyzja (dotyczy PRD: 009-premium-ui-refresh-prd.md): Redesign premium UI jest realizowany wyłącznie w warstwie frontendowej (`HTML/CSS/JS`) bez zmiany kontraktu backendu i endpointu `/translate`.
+  Uzasadnienie: PRD 009 opisuje zmianę jakości wizualnej, hierarchii layoutu i UX, bez rozszerzania funkcjonalności backendu.
+  Konsekwencje: Implementacja powinna ograniczyć się do struktury szablonu, stylów i komunikatów/stanu w JS; testy backendowe nie wymagają zmian zakresowych.
+
+- Decyzja (dotyczy PRD: 009-premium-ui-refresh-prd.md): UI przechodzi na spójne polskie etykiety i komunikaty operacyjne, z wyjątkiem nazwy produktu `Local AI Translator`.
+  Uzasadnienie: PRD 009 wskazuje niespójność językową jako jeden z głównych problemów obecnego interfejsu.
+  Konsekwencje: Należy zaktualizować napisy w HTML i JS oraz zachować spójność future changes z językiem polskim.
+
+- Decyzja (dotyczy PRD: 009-premium-ui-refresh-prd.md): Istnieje konflikt z wcześniejszymi decyzjami PRD 005, PRD 006 i PRD 007 dotyczącymi pozycjonowania social nad kartą tłumaczeń oraz wyodrębnienia stopki pod panelem skrótów.
+  Uzasadnienie: PRD 009 wymaga przeniesienia linków social do headera oraz większej spójności wizualnej panelu skrótów i stopki z główną kartą aplikacji.
+  Konsekwencje: Nie należy nadpisywać wcześniejszych decyzji bez doprecyzowania docelowej struktury layoutu.
+
+- Decyzja (dotyczy PRD: 009-premium-ui-refresh-prd.md): Linki social GitHub/X są przeniesione do headera produktu jako normalny element layoutu, a nie warstwa pozycjonowana absolutnie względem `.app`.
+  Uzasadnienie: To usuwa konflikt z technicznym pozycjonowaniem z PRD 005/007 i odpowiada kierunkowi premium UI z wyraźnym top barem.
+  Konsekwencje: Sekcja `page-social` przestaje być elementem nakładanym nad kartą tłumaczeń; interakcje social pozostają bez zmian funkcjonalnych.
+
+- Decyzja (dotyczy PRD: 009-premium-ui-refresh-prd.md): Panel skrótów i stopka pozostają poza `main.app` jako osobne sekcje po głównym kontenerze, ale mają zostać wizualnie ujednolicone z nowym systemem kart/surface.
+  Uzasadnienie: To zachowuje zgodność z wcześniejszą kolejnością sekcji z PRD 006 oraz minimalizuje ryzyko regresji layoutu przy jednoczesnym spełnieniu wymogu spójności wizualnej.
+  Konsekwencje: Implementacja 4.1 nie przenosi tych sekcji do wnętrza `.app`; zmiana obejmuje styl, szerokość, spacing i relację wizualną z główną kartą.
+
+- Decyzja (dotyczy PRD: 009-premium-ui-refresh-prd.md): Docelowa hierarchia layoutu dla milestone’u 4.1 to: `header produktu` -> `control bar języków` -> `sekcja dwóch paneli` -> `action/status bar` wewnątrz `main.app`, a następnie `shortcuts-panel` i `footer` jako osobne sekcje poniżej.
+  Uzasadnienie: Taki układ rozdziela sterowanie, wejście, wynik i status bez zmiany kontraktu backendu oraz pozwala zachować logiczny rytm strony.
+  Konsekwencje: Milestone 4.1 może wdrażać redesign bez dalszych decyzji strukturalnych HTML.
 
 ---
 

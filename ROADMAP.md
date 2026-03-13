@@ -271,3 +271,46 @@ Zakres:
 - dodanie obsługi `source_lang=auto` w backendzie z użyciem `langid`
 - ograniczenie detekcji do listy języków wspieranych i fallback `en`
 - dodanie komunikatu statusu o autodetekcji oraz zachowanie kompatybilności z LocalStorage
+
+---
+
+## Milestone 4.0: Redukcja ryzyka premium redesignu UI (done)
+
+Cel:
+- przygotować bezpieczną przebudowę layoutu i hierarchii wizualnej bez regresji głównego flow tłumaczenia
+- rozstrzygnąć konflikt między nowym header/layoutem a dotychczasowym pozycjonowaniem social, panelu skrótów i stopki
+
+Definition of Done:
+- istnieje docelowa struktura layoutu dla headera produktu, control bara, paneli wejścia/wyjścia i obszaru statusu
+- istnieje jednoznaczna decyzja, czy panel skrótów i stopka trafiają do wnętrza `.app`, czy pozostają osobnymi kartami
+- linki GitHub/X nie są już planowane jako element pozycjonowany absolutnie nad kartą tłumaczeń
+- plan zachowuje zgodność ze streamingiem, Cancel, Copy, Export, theme toggle i trybem `Auto`
+- zakres zmian w HTML/CSS/JS jest rozpisany tak, aby kolejny milestone mógł wdrożyć redesign bez decyzji architektonicznych
+
+Zakres:
+- doprecyzowanie docelowej hierarchii sekcji: header, control bar, input, output, status
+- doprecyzowanie relacji layoutowej dla social, panelu skrótów i stopki względem `.app`
+- potwierdzenie braku zmian kontraktu backendu i endpointu `/translate`
+- przygotowanie bezpiecznego podziału redesignu na wdrażalne kroki frontendowe
+
+---
+
+## Milestone 4.1: Premium UI Refresh i pełna polonizacja interfejsu (planned)
+
+Cel:
+- wdrożyć nowoczesny, spokojny i premium wygląd aplikacji przy zachowaniu obecnej funkcjonalności
+- ujednolicić cały język interfejsu na polski z zachowaniem nazwy produktu `Local AI Translator`
+
+Definition of Done:
+- aplikacja ma wyraźny header produktu z badge, opisem wartości, przełącznikiem motywu i linkami social
+- sekcja języków działa jako osobny control bar, a panele wejścia i wyniku mają własne nagłówki i opisy
+- pole wyniku ma placeholder i jest wizualnie odróżnione od pola wejściowego
+- status tłumaczenia ma formę chipa/pill, a komunikaty UI są spójnie po polsku
+- podczas tłumaczenia blokowane są pole wejścia, oba selecty i przycisk zamiany języków
+- redesign działa poprawnie w light mode, dark mode i na mobile, bez regresji dla streaming, Cancel, Copy, Export i `Auto`
+
+Zakres:
+- przebudowa HTML headera produktu, control bara oraz nagłówków kart wejścia i wyniku
+- wdrożenie nowego systemu wizualnego w CSS: tło, tokeny kolorów, surface cards, spacing, promienie, CTA, ikony i status chip
+- pełna polonizacja etykiet i komunikatów UI w HTML/JS
+- rozszerzenie logiki JS o spójne statusy `Auto` i blokadę dodatkowych kontrolek podczas tłumaczenia
