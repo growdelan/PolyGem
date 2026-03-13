@@ -8,8 +8,14 @@ class SmokeTest(unittest.TestCase):
     def test_index_loads(self):
         client = app.test_client()
         response = client.get("/")
+        body = response.get_data(as_text=True)
         self.assertEqual(response.status_code, 200)
-        self.assertIn("Local AI Translator", response.get_data(as_text=True))
+        self.assertIn("Local AI Translator", body)
+        self.assertIn("Offline • Private • Ollama", body)
+        self.assertIn("Język wejściowy", body)
+        self.assertIn("Język wyjściowy", body)
+        self.assertIn("Tutaj pojawi się tłumaczenie...", body)
+        self.assertIn("Gotowe do tłumaczenia", body)
 
     def test_translate_stubbed(self):
         client = app.test_client()

@@ -38,9 +38,12 @@ uv run src/app.py
 ```
 
 ## Funkcjonalności
+- Premium, w pełni spolonizowany interfejs z headerem produktu
 - Tryb jasny/ciemny zapamiętywany w LocalStorage
 - Zapamiętywanie wybranych języków w LocalStorage
+- Autodetekcja języka źródłowego (`Auto`)
 - Export tłumaczenia do pliku `.txt`
+- Streaming tłumaczenia, przycisk `Przerwij`, kopiowanie i zapis wyniku
 
 ## Zmienne środowiskowe
 - `FLASK_BIND_ADDR` – adres, na którym startuje Flask (domyślnie `http://127.0.0.1:8000`).

@@ -26,6 +26,10 @@
 - Opcja `Auto` dla języka źródłowego z autodetekcją przez `langid` po stronie backendu
 - Dokumentacja premium redesignu UI (PRD 009) jest dodana do repo
 - Docelowy layout dla premium redesignu jest doprecyzowany w spec i roadmapie
+- Premium header produktu z badge, przełącznikiem motywu i linkami social w normalnym layoucie
+- Control bar języków oraz premium karty wejścia i wyniku
+- Pełna polonizacja głównych akcji i statusów UI
+- Status tłumaczenia jako chip oraz blokada selectów i przycisku swap podczas tłumaczenia
 - Testy `unittest` przechodzą
 
 ## Co jest skończone
@@ -44,15 +48,16 @@
 - Milestone 3.6: ikona X w sekcji social i stopce
 - Milestone 3.7: autodetekcja języka źródłowego (Auto)
 - Milestone 4.0: redukcja ryzyka premium redesignu UI
+- Milestone 4.1: Premium UI Refresh i pełna polonizacja interfejsu
 
 ## Co jest w trakcie
 
 ## Co jest następne
-- Milestone 4.1: Premium UI Refresh i pełna polonizacja interfejsu
+- TODO (kolejny milestone do zdefiniowania w ROADMAP.md)
 
 ## Blokery i ryzyka
 - Brak aktywnych blokerów
-- Otwarte ryzyko wdrożeniowe: redesign 4.1 wymaga zachowania zgodności z istniejącym flow tłumaczenia oraz responsywnością mobile
+- Brak
 
 ## Ostatnie aktualizacje
 - 2026-02-01: zakończono Milestone 3.2
@@ -63,3 +68,4 @@
 - 2026-02-08: zakończono Milestone 3.7
 - 2026-03-13: dodano PRD 009 premium redesignu UI
 - 2026-03-13: zakończono Milestone 4.0
+- 2026-03-13: zakończono Milestone 4.1

@@ -44,6 +44,9 @@ const pulseSuccess = (button) => {
 const setBusy = (busy) => {
     translateButton.disabled = busy;
     sourceText.disabled = busy;
+    sourceLang.disabled = busy;
+    targetLang.disabled = busy;
+    swapButton.disabled = busy;
     cancelButton.disabled = !busy;
     spinner.classList.toggle("active", busy);
 };
@@ -171,7 +174,7 @@ translateButton.addEventListener("click", async () => {
     if (isAutoSource) {
         setStatus("Auto: wykrywanie języka...");
     } else {
-        setStatus("Translating...");
+        setStatus("Tłumaczenie...");
     }
     targetText.value = "";
     currentController = new AbortController();
@@ -193,12 +196,12 @@ translateButton.addEventListener("click", async () => {
         if (!response.ok) {
             const data = await response.json();
             targetText.value = data.error || "Błąd tłumaczenia.";
-            setStatus("Błąd");
+            setStatus("Wystąpił błąd");
             return;
         }
 
         if (!response.body) {
-            setStatus("Błąd");
+            setStatus("Wystąpił błąd");
             targetText.value = "Brak odpowiedzi z serwera.";
             return;
         }
@@ -206,9 +209,9 @@ translateButton.addEventListener("click", async () => {
         if (isAutoSource) {
             const detectedSource = response.headers.get("X-Detected-Language");
             if (detectedSource) {
-                setStatus(`Wykryto: ${getLanguageLabel(detectedSource)} • Translating...`);
+                setStatus(`Wykryto: ${getLanguageLabel(detectedSource)} • Tłumaczenie...`);
             } else {
-                setStatus("Translating...");
+                setStatus("Tłumaczenie...");
             }
         }
 
@@ -231,7 +234,7 @@ translateButton.addEventListener("click", async () => {
             setStatus("Przerwano");
         } else {
             targetText.value = "Błąd połączenia z serwerem.";
-            setStatus("Błąd");
+            setStatus("Wystąpił błąd");
         }
     } finally {
         currentController = null;

@@ -295,7 +295,7 @@ Zakres:
 
 ---
 
-## Milestone 4.1: Premium UI Refresh i pełna polonizacja interfejsu (planned)
+## Milestone 4.1: Premium UI Refresh i pełna polonizacja interfejsu (done)
 
 Cel:
 - wdrożyć nowoczesny, spokojny i premium wygląd aplikacji przy zachowaniu obecnej funkcjonalności
